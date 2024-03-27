@@ -1,0 +1,114 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content</title>
+    {% block content %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add your custom styles here */
+        /* For example: */
+        .container {
+            margin-top: 50px;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- <button id="age_check_btn" type="button" class="btn btn-primary" onclick="age_validation()">Check Age</button> -->
+    <div class="container" id="age_restriction_alert" style="display: none;">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="alert alert-danger" role="alert">
+                    You must be 18 years or older to access this content.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center">{{ Details.details_title }}</h1>
+                <div class="text-center">
+                    <a href="{% url 'webuser:play_content' Content.id %}">
+                        <img src="{{ Details.details_photo.url }}" alt="" class="img-fluid" id="content_image">
+                    </a>
+                </div>
+                <div>
+                    <input type="submit" name="btn_submit" value="Play" id="" onclick="age_validation()">
+                </div>
+                <div>
+                    <p>Description:</p>
+                    <p>{{ Details.details_description }}</p>
+                </div>
+                <div>
+                    <p>Category:</p>
+                    <p>{{ Details.category_id.category_name }}</p>
+                </div>
+                <div>
+                    <p>Certificate:</p>
+                    <p>{{ Details.details_certificate }}</p>
+                </div>
+                <div>
+                    <p>Genre:</p>
+                    <p>{{ Details.details_genres }}</p>
+                </div>
+                <div>
+                    <p>Language:</p>
+                    <p>{{ Details.language_id.language_name }}</p>
+                </div>
+                <div>
+                    <p>Duration:</p>
+                    <p>{{ Content.content_duration }} hr</p>
+                </div>
+                <div>
+                    <p>Release Date:</p>
+                    <p>{{ Content.content_release_date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    // Check user's age when the page loads
+    function age_validation() {
+        var age = `{{ user_age }}`;
+        console.log(age)
+        if (age < 18) {
+        //     // Display age restriction notification
+        //     var popup = document.createElement("div");
+        //     popup.className = "alert alert-danger";
+        //     popup.setAttribute("role", "alert");
+        //     popup.innerHTML = "You must be 18 years or older to access this content.";
+        //     document.body.appendChild(popup);
+        }
+
+        document.getElementById("age_restriction_alert").style.display = "block";
+    };
+
+</script>
+
+// <script>
+//     // Show age restriction alert when button is clicked
+//     document.getElementById("age_check_btn").addEventListener("click", function() {
+//         var age = {{ user_age }};
+//         if (age < 18) {
+//             // Display age restriction notification
+//         }
+//     });
+// </script>
+</body>
+</html>
+{% endblock content %}

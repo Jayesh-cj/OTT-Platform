@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Play</title>
+</head>
+<body>
+    <table align="center">
+        <tr>
+            <td align="center"><h1>{{ Content_data.details_id.details_title }} Season {{ Content_data.content_season }} Episode {{ Content_data.content_episode}}</h1></td>
+        </tr>
+        <tr>
+            <td align="center">
+                <video src="{{ Content_data.content_file.url }}" width="800px" height="600px" controls="true" poster="{{ Details.details.photo }}"></video>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% if Content_data.details_id.details_filesize == 0 %}
+                    Description : <b>{{ Content_data.details_id.details_description }}</b><br>
+                {% else %}
+                    Episode Title : <b>{{ Content_data.content_title }}</b> <br>
+                    Episode Description : <b>{{ Content_data.content_description }}</b><br>
+                {% endif %}
+                Duration : <b>{{ Content_data.content_duration }}</b><br>
+                Genre : <b>{{ Content_data.details_id.details_genres }}</b><br>
+                Language : <b>{{ Content_data.details_id.language_id.language_name }}</b><br>
+                Release Date : <b>{{ Content_data.content_release_date }}</b>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

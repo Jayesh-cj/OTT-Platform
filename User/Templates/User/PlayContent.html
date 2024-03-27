@@ -1,0 +1,44 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Content</title>
+</head>
+<body>
+    {% block content %}
+      
+    <form action="" method="post">
+        <div>
+            <video src="{{ Content.content_file.url }}" poster="{{ Content.details_id.details_photo.url }}" controls id="myVideo"></video>
+        </div>
+    </form>
+
+    <script>
+        const video = document.getElementById('myVideo');
+    
+        function skipForward() {
+            video.currentTime += 10; // Skip forward 10 seconds
+        }
+    
+        function skipBackward() {
+            video.currentTime -= 10; // Skip backward 10 seconds
+        }
+    
+        // Add event listeners to trigger skip functions
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                skipForward();
+            } else if (event.key === 'ArrowLeft') {
+                skipBackward();
+            }
+        });
+    </script>
+
+</body>
+</html>
+        
+{% endblock content %}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contents</title>
+</head>
+<body>
+    <form action="" method="post">
+        <div class="grid-container">
+            {% for i in Details %}
+                <a href="{% url 'webuser:content_details' i.id %}">
+                    <div class="grid-item">
+                        <img src="{{ i.details_photo.url }}" alt="Not Found">
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </form>
+</body>
+</html>

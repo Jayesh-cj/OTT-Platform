@@ -1,0 +1,43 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+</head>
+<body>
+      
+    <form action="" method="post">
+        <h2 align="center">Log in</h2>
+        {% csrf_token %}
+        <table align="center">
+            <caption align="bottom">
+                <a href="{% url 'webguest:user_registration' %}">Sign up</a>
+            </caption>
+            <tr>
+                <td>Eamil</td>
+                <td><input type="text" name="txt_email" id=""></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txt_password" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Log in" name="btn_submit">
+                    <input type="reset" value="Cancel" name="btn_cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+
+{% if msg %}
+  <script>
+    alert("{{ msg }}");
+  </script>
+{% endif %}
+

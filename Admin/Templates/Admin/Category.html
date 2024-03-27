@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <td>Category</td>
+                <td><input type="text" name="txt_category" id="" value="{{ Cdata.category_name }}"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Save" name="btn_save">
+                    <input type="reset" value="Cancel" name="btn_cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br><br>
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <td>SL.no</td>
+            <td>Category</td>
+            <td colspan="2" align="center">Action</td>
+        </tr>
+        {% for i in Cat_data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.category_name }}</td>
+                <td><a href="{% url 'webadmin:del_category' i.id %}">Delete</a></td>
+                <td><a href="{% url 'webadmin:edit_category' i.id %}">Edit</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Content</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        <caption align="top"><h2 align="center">Add Content</h2></caption>
+        {% csrf_token %}
+        <table align="center" height="150px">
+            <tr>
+                <td>Content Title</td>
+                <td>
+                    <select name="sel_title" id=""> 
+                        <option value="">---Select---</option>
+                        {% for i in Title %}
+                            <option value="{{ i.id }}"> {{ i.details_title }} </option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Upload File</td>
+                <td><input type="file" name="file_content_movie" id=""></td>
+            </tr>
+            <tr>
+                <td>Duration</td>
+                <td><input type="text" name="time_duration" id="" placeholder="00:00:00"></td>
+            </tr>
+            <tr>
+                <td>Release Date</td>
+                <td><input type="date" name="date_release" id=""></td>
+            </tr>
+            <tr align="center">
+                <td colspan="2">
+                    <input type="submit" name="btn_submit" value="Upload" />
+                    <input type="reset" name="btn_cancel" value="Cancel" />
+                </td>
+            </tr>   
+        </table>
+    </form>
+</body>
+</html>

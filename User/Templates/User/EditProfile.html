@@ -1,0 +1,40 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+<body>
+
+{% block content %}
+  
+<form action="" method="post">
+    <table align="center">
+            {% csrf_token %}
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" value="{{ Details.user_name }}" id=""></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txt_contact" value="{{ Details.user_contact }}" id=""></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="txt_email" value="{{ Details.user_email }}" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btn_submit" value="Update"></a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Content Details</title>
+    <style>
+        .checkbox-columns {
+            column-count: 3;
+            column-gap: 20px; /* Adjust the gap between columns as needed */
+        }
+
+        .checkbox-columns label {
+            display: block;
+            margin-bottom: 5px; /* Adjust the vertical spacing between checkboxes */
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        <caption align="top"><h2 align="center">Add Content Details</h2></caption>
+        {% csrf_token %}
+        <table align="center" height="500px">
+            <tr>
+                <td>Title</td>
+                <td><input type="text" name="txt_content_title" id=""></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><textarea name="txt_content_description" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <td>Poster</td>
+                <td><input type="file" name="file_poster" id=""></td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select name="sel_category" id="">
+                        <option value="">---Select---</option>
+                        {% for i in Category %}
+                            <option value="{{ i.id }}"> {{ i.category_name }} </option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>
+                    <select name="sel_language" id="">
+                        <option value="">---Select---</option>
+                        {% for i in Language %}
+                            <option value="{{ i.id }}"> {{ i.language_name }} </option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Genre</td>
+                <td>
+                    <div class="checkbox-columns">
+                        {% for i in Genre %}
+                            <label>
+                                <input type="checkbox" name="check_genre[]" value="{{ i.id }}" id="">{{ i.genre_name }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Certificate</td>
+                <td>
+                    <select name="sel_certificate" id="">
+                        <option value="">---Select---</option>
+                        <option value="U">U</option>
+                        <option value="U/A">U/A</option>
+                        <option value="A">A</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>File Type</td>
+                <td>
+                    <select name="sel_file_type" id="">
+                        <option value="0">Single File</option>
+                        <option value="1">Multiple Files</option>
+                    </select>
+                </td>
+            </tr>
+            <tr align="center">
+                <td colspan="2">
+                    <a href="{% url 'webadmin:homepage' %}"><input type="button" name="btn+_back" value="Back"/></a>
+                    <input type="submit" name="btn_submit" value="Upload" />
+                </td>
+            </tr> 
+        </table>
+    </form>
+    <br><br>
+</body>
+</html>

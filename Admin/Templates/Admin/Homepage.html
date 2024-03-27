@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+
+  <style>
+
+  /* Styles for the dropdown */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  </style>
+
+</head>
+<body>
+  <header align="right">
+    <a href="{% url 'webadmin:change_password' %}">Change Password</a>
+  </header>
+    <h1 align="center">Welcome</h1>
+
+    <div class="dashboard">
+        <ul>
+            <li><a href="{% url 'webadmin:category' %}">Category</a></li>
+            <li><a href="{% url 'webadmin:language' %}">Language</a></li>
+            <li><a href="{% url 'webadmin:genre' %}">Genre</a></li>
+        </ul>
+
+        <div class="dropdown">
+          <label for="dropdown-menu" id="dropdown-label">Upload</label>
+          <div class="dropdown-menu" id="dropdown-menu">
+            <a href="{% url 'webadmin:add_content_details' %}">Content Details</a>
+            <a href="{% url 'webadmin:add_content' %}">Content</a>
+            <a href="{% url 'webadmin:add_series' %}">Series</a>
+            <a href="{% url 'webadmin:add_crew_details' %}">Crew Details</a>
+            <a href="{% url 'webadmin:upload_trailer' %}">Trailer</a>
+          </div>
+        </div>
+
+        <ul>
+            <li><a href="{% url 'webadmin:package' %}">Package Management</a></li>
+
+              <!-- <div class="dropdown">
+                <label for="">Upload</label>
+                <div class="dropdown-content">
+                <a href="{% url 'webadmin:add_content_details' %}">Content Details</a>
+                <a href="{% url 'webadmin:add_content' %}">Content</a>
+                <a href="{% url 'webadmin:add_series' %}">Series</a>
+                <a href="{% url 'webadmin:add_crew_details' %}">Crew Details</a>
+                <a href="{% url 'webadmin:upload_trailer' %}">Trailer</a>
+                </div>
+              </div> -->
+
+            <li><a href="{% url 'webadmin:content_display' %}">Content Management</a></li>
+            <li><a href="{% url 'webadmin:view_complaints' %}">Complaints</a></li>
+            <li><a href="{% url 'webadmin:users_list' %}">Users List</a></li>
+        </ul>
+    </div>
+
+
+
+
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var label = document.getElementById("dropdown-label");
+        var menu = document.getElementById("dropdown-menu");
+      
+        label.addEventListener("click", function() {
+          if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "block";
+          } else {
+            menu.style.display = "none";
+          }
+        });
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinemate - Stream Your Favorites</title>
+
+  <link rel="shortcut icon" href="{% static '' %}../../Images/OIP (2).jpeg" type="image/x-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom styles */
+    .navbar-brand img {
+      width: 50px; /* Adjust the size of the image */
+      height: 50px; /* Adjust the size of the image */
+      margin-right: 10px; /* Add margin between image and text */
+    }
+    .jumbotron {
+      background-color: #f3c9f7d7;
+      color: #0f0303;
+      padding: 100px 0;
+    }
+    .feature {
+      padding: 50px 0;
+    }
+    .feature-image {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#"><img src="Guest/static/assets/images/OIP_(2).jpeg" alt="">Cinemate</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'webguest:user_login' %}">Log in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'webguest:user_registration' %}">Sign up</a>
+          </li>
+          <!-- <li class="nav-item" style="display: none;">
+            <a class="nav-link" href="#">Contact</a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Welcome to Cinemate</h1>
+      <p class="lead">Stream your favorite movies and TV shows anytime, anywhere.</p>
+      <a href="{% url 'webguest:user_login' %}" class="btn btn-primary btn-lg">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="feature">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <img src="/Guest/static/assets/images/OIP_(3).jpeg" alt="Unlimited Streaming" class="feature-image">
+          <h3>Unlimited Streaming</h3>
+          <p>Access a vast library of movies and TV shows.</p>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <img src="/Guest/static/assets/images/OIP_(4).jpeg" alt="Multi-Device Support" class="feature-image">
+          <h3>Multi-Device Support</h3>
+          <p>Watch on your phone, tablet, or TV.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light text-center py-4">
+    <div class="container">
+      <p>&copy; 2024 Cinemate. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

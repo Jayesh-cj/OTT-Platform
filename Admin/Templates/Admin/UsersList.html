@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+            <table align="center" cellpadding="10">
+            {% for i in Users %}
+                <tr>
+                    <td><img src="{{ i.user_photo.url }}" alt=""></td>
+                    <td>
+                        Name : <b>{{ i.user_name}}</b><br>
+                        Contact : {{ i.user_contact }} <br>
+                        Email : {{ i.user_email }} <br>
+                        Gender : {{ i.user_gender }} <br>
+                        Date Of Birth : {{ i.user_dob }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        {% comment %} <input type="button" onclick="user_ban('{{ i.id }}')"   value="Delete"> {% endcomment %}
+                        <a href="{% url 'webadmin:user_ban' i.id %}">Ban</a> 
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+    </form>
+</body>
+</html>
+
+
+{% comment %} <script>
+    function user_ban(uid) {
+        var success = confirm("Do You Want To Delete")
+        if(success) {
+            window.location="Admin/BanUser"+uid
+        }
+    }
+</script> {% endcomment %}

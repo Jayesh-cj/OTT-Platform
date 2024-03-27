@@ -1,0 +1,53 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+
+{% block content %}
+  
+<form action="" method="post">
+    <table align="center" width="600px">
+        <tr>
+            <td colspan="2" align="center">
+                    <img src="{{ User.user_photo.url }}" alt="Profile">
+                </td>
+            </tr>
+            <tr>
+                <td>Name </td>
+                <td><b>{{ User.user_name }}</b></td>
+            </tr>
+            <tr>
+                <td>Contact </td>
+                <td>{{ User.user_contact }}</td>
+            </tr>
+            <tr>
+                <td>Email </td>
+                <td>{{ User.user_email }}</td>
+            </tr>
+            <tr>
+                <td>Gender </td>
+                <td>{{ User.user_gender }}</td>
+            </tr>
+            <tr>
+                <td>Date Of Birth </td>
+                <td>{{ User.user_dob }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <a href="{% url 'webuser:edit_profile' %}">Edit Profile</a>
+                    <a href="{% url 'webuser:change_password' %}">Change Password</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+        
+{% endblock content %}

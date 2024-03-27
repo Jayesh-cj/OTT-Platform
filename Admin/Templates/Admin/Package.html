@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package</title>
+</head>
+<body>
+    <form action="" method="post">
+        <table border="1" align="center">
+            {% csrf_token %}
+            <Caption align="top"><h1>Create Package</h1></Caption>
+            <tr>
+                <td><input type="text" name="txt_name" id="" placeholder="Package title" value="{{ Edit.package_title }}"></td>
+            </tr>
+            <tr>
+                <td><textarea name="txt_discription" id="" rows="5" cols="35" placeholder="Package Details">{{ Edit.package_discription }}</textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="number" name="num_validity" id="" placeholder="Package Validity in months" value="{{ Edit.package_validity }}">
+                    <input type="number" name="num_price" id="" placeholder="Price" value="{{ Edit.package_price }}">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Create" name="btn_submit">
+                    <input type="reset" value="Cancel" name="btn_cancel">
+                </td>
+            </tr>
+        </table>
+        <br><br>
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <td>SL.no</td>
+                <td>Package Details</td>
+                <td>Validity</td>
+                <td>Price</td>
+                <td colspan="2" align="center">Action</td>
+            </tr>
+            {% for i in Package %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><b>{{ i.package_title }}</b><br><p>{{ i.package_discription }}</p></td>
+                <td>{{ i.package_validity }} Months</td>
+                <td>{{ i.package_price }}</td>
+                <td><a href="{% url 'webadmin:edit_package' i.id %}">Edit</a></td>
+                <td><input type="button" onclick="package_delete('{{i.id}}')" value="Delete"></td>
+                <!-- <td><a href="{% url 'webadmin:del_package' i.id %}">Delete</a></td> -->
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+<script>
+    function package_delete(pid){
+        var result = confirm("Do you want to delete")
+        if(result){
+            window.location="/Admin/Del_Package/"+pid
+        }
+        // console.log(pid);
+    }
+</script>

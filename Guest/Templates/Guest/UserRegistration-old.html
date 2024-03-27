@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data" id="UserForm" >
+        <h2 align="center">Create Account</h2>
+        <table border="1" align="center">
+            <caption align="bottom">
+                <a href="{% url 'webguest:user_login' %}">Log in</a>
+            </caption>
+            {% csrf_token %}
+            <tr>
+                <td colspan="2"><input type="file" name="file_photo" id=""></td>
+            </tr>
+            <tr>
+                <td>&nbsp;Name</td>
+                <td><input type="text" name="txt_name" id=""></td>
+            </tr>
+            <tr>
+                <td>&nbsp;Contact</td>
+                <td><input type="number" name="num_contact" id=""></td>
+            </tr>
+            <tr>
+                <td>&nbsp;Email</td>
+                <td><input type="text" name="txt_email" id=""></td>
+            </tr>
+            
+            <tr>
+                <td>&nbsp;Gender</td>
+                <td>
+                    <input type="radio" name="gender" value="Male" id="">Male <br>
+                    <input type="radio" name="gender" value="Female" id="">Female <br>
+                    <input type="radio" name="gender" value="Others" id="">Others
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;Date Of Birth</td>
+                <td><input type="date" name="date_dob" id=""></td>
+            </tr>
+            <tr>
+                <td>&nbsp;Password</td>
+                <td><input type="password" name="txt_password" id=""></td>
+            </tr>
+            <tr>
+                <td>&nbsp;Confirm Password</td>
+                <td><input type="password" name="txt_con_password" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Create" name="btn_submit">
+                    <input type="reset" value="Cancel" name="btn_cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#district").change(function () {
+            var did = $(this).val();
+            var ur = $("#UserForm").attr("data-places-url");
+            $.ajax({
+                url: ur,
+                data: { disid: did, },
+                success: function (data) {
+                    $("#place").html(data);
+                },
+            });
+        });
+</script> {% endcomment %}
+
+{% if msg %}
+<script>
+alert(msg)
+</script>
+{% endif %}

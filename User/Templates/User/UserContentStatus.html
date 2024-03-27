@@ -1,0 +1,55 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Status</title>
+    
+    {% block content %}
+      
+    <style>
+        img{
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center" width="800px" border="1">
+            <tr>
+                <th>SL.NO</th>
+                <th>Movie Details</th>
+                <th>Status</th>
+            </tr>
+            {% for i in Details %}
+            <tr>
+                <th>{{ forloop.counter }} </th>
+                <th>
+                    <div class="poser">
+                        <img src="{{ i.details_photo.url }}" alt="">
+                    </div>
+                </th>
+                <th>
+                    {% if i.details_status == 0 %}
+                      Not Viewed
+                      {% elif i.details_status == 1 %}
+                      Accepted
+                      {% elif i.details_status == 2 %}
+                      Re Request
+                      {% else %}
+                      Rejected
+                      {% endif %}
+                    </th>
+                </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+
+
+{% endblock content %}

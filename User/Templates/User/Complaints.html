@@ -1,0 +1,51 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints</title>
+
+    {% block content %}
+      
+    <style>
+        table{
+            width: 100%;
+        }
+        th{
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <table align="center">
+        <tr>
+            <th>Sl.NO</th>
+            <th>Complaint Content</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        {% for i in Complaints %}
+        <tr>
+            <td align="center">{{ forloop.counter }} </td align="center">
+            <td>
+                <b>{{ i.complaint_title }}</b>
+                <p>{{ i.complaint_content }} </p>
+            </td>
+            <td>{{ i.complaint_date }} </td>
+            <td>
+                {% if i.complaint_status == 0 %}
+                  Not Viewed
+                  {% else %}
+                  <a href="#">View Replay</a>
+                  {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+            
+{% endblock content %}

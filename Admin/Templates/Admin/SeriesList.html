@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series Details</title>
+</head>
+<body>
+    <form action="" method="post">
+        <table align="center" cellpadding="10px" width="800px">
+            {% for i in Series_Details %}
+                <tr align="center">
+                    <td colspan="2"><h3>{{ i.content_title }}</h3></td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><img src="{{ i.details_id.details_photo.url}}" alt="Content Poster" style="width: 500px;"></td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ i.content_description }} <br><br>
+                        Category :  {{ i.details_id.category_id.category_name }} <br>
+                        Language :{{ i.details_id.language_id.language_name }} <br>
+                        Genre : {{ i.details_id.details_genres }} <br>
+                        Duration : {{ i.content_duration }} hr <br>
+                        Release Date : {{ i.content_release_date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <a href="{% url 'webadmin:content_play' i.id %}"><input type="button" value="Watch"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place</title>
+</head>
+<body>
+    <form action="" method="post">
+        <table border="1" align="center" cellpadding="10">
+            {% csrf_token %}
+            <tr>
+                <td>District</td>
+                <td>
+                    <select name="sel_district" id="">
+                        <option value="">--Select--</option>
+                        {% for i in Dis_data %}
+                            <option 
+                                {% if i.id == Place.district_id.id %}
+                                    selected
+                                {% endif %}
+                                    value="{{ i.id }}">{{ i.district_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Place Name</td>
+                <td><input type="text" name="txt_place" id="" value="{{ Place.place_name }}"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Submit" name="btn_submit">
+                    <input type="reset" value="Cancel" name="btn_cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br><br>
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <td>Sl.no</td>
+            <td>District</td>
+            <td>Place</td>
+            <td colspan="2" align="center">Action</td>
+        </tr>
+        {% for i in PData %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.district_id.district_name }}</td>
+            <td>{{ i.place_name }}</td>
+            <td><a href="{% url 'webadmin:del_place' i.id %}">Delete</a></td>
+            <td><a href="{% url 'webadmin:edit_place' i.id %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

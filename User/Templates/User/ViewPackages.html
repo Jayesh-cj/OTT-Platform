@@ -1,0 +1,49 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Packages</title>
+</head> 
+<body>
+    {% block content %}
+      
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center" width="500" height="100">
+            {% for i in Package %}
+                <tr>
+                    <td colspan="2">
+                        <h3 align="center">{{ i.package_title }}</h3><br/>
+                        {{ i.package_discription }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ i.package_validity }} Months
+                    </td>
+                    <td align="right">
+                        {{ i.package_price }} /-
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                    <input type="hidden" name="package_id" value="{{ i.id }}" id="">
+
+                        {% if sub_details.package_id == i.id %}
+                        Subscribed
+                    {% else %}
+                    <!-- <a href="{% url 'webuser:subscribe_package' i.id %}">Subscribe</a> -->
+                    <input type="submit" value="Subscribe" name="btn_submit">
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+    {% endblock content %}

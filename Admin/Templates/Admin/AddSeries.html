@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Series</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        <caption align="top"><h2 align="center">Add Multiple Contents</h2></caption>
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>Content Title</td>
+                <td>
+                    <select name="sel_title" id="">
+                        <option value="">---Select---</option>
+                        {% for i in Details %}
+                            <option value="{{ i.id }}">{{ i.details_title }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Season</td>
+                <td>
+                    <input type="number" name="num_season" id="" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td>Episode</td>
+                <td>
+                    <input type="number" name="num_episode" id="">
+                </td>
+            </tr>
+            <tr>
+                <td>Episode Title</td>
+                <td>
+                    <input type="text" name="txt_episode_title" id="">
+                </td>
+            </tr>
+            <tr>
+                <td>Episode Description</td>
+                <td>
+                    <textarea name="txt_episode_description" id="" cols="30" rows="10"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Content File</td>
+                <td>
+                    <input type="file" name="file_series" id="">
+                </td>
+            </tr>
+            <tr>
+                <td>Release Date</td>
+                <td>
+                    <input type="date" name="date_release_date" id="">
+                </td>
+            </tr>
+            <tr>
+                <td>Episode Duration</td>
+                <td><input type="text" name="txt_duration" id="" placeholder="00:00:00"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Upload" name="btn_submit">
+                    <input type="reset" value="Cancel" name="btn_cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+{% if msg %}
+  <script>
+    alert("{{msg}}")
+  </script>
+{% endif %}

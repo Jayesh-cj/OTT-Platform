@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <style>
+        .container{
+            display: flex;
+        }
+        .title{
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="container">
+        <div class="profile">
+            <img src="{{ Crew.crew_photo.url }}" alt="Not Found">
+        </div>
+        <div class="details">
+            <h1>{{ Crew.crew_name }}</h1>
+            <a href="https://www.bing.com/search?q={{Crew.crew_name}}+Actor" target="_blank">Kow More</a>
+        </div>
+    </div>
+    <div class="title">
+        <h1>Movies</h1>
+    </div>
+    <div class="contents">
+        <div class="poster">
+            <img src="{{ Crew.details_id.details_photo.url }}" alt="Not Found">
+        </div>
+    </div>
+</body>
+</html>
