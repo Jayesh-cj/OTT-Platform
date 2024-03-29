@@ -522,22 +522,60 @@ def starrating(request):
     return JsonResponse(result)
 
 
+# Chatroom List 
+def chatroom_list(request):
+    list = tbl_chatroom.objects.all()
+    return render(request,'User/ChatroomList.html',{
+        'List':list
+    })
+
+
+# Create Chatrrom 
+def create_chatroom(request):
+    user = request.session['uid']
+    # print(user)
+    if request.method == 'POST':
+        tbl_chatroom.objects.create(
+            community_name = request.POST.get('txt_name'),
+            community_photo = request.FILES.get('file_photo'),
+            community_description = request.POST.get('txt_description'),
+            community_date = date.today(),
+            community_status = request.POST.get('status'),
+            user_id = user
+        )
+        return redirect('webuser:chatrooms')
+    else:
+        return render(request,'User/CreateChatroom.html')
+
 
 # Chat Room
-def chatpage(request):
+def chatpage(request,rid):
     user  = tbl_user.objects.get(id=request.session["uid"])
-    return render(request,"User/Chat.html",{"user":user})
+    room = tbl_chatroom.objects.get(id=rid)
+    # print(room.community_name)
+    return render(request,"User/Chat.html",{
+        "user":user,
+        'Room':room
+    })
 
-def ajaxchat(request):
+def ajaxchat(request,rid):
     from_user = tbl_user.objects.get(id=request.session["uid"])
     # to_user = tbl_user.objects.get(id=request.POST.get("tid"))
-    tbl_chat.objects.create(chat_content=request.POST.get("msg"),chat_time=datetime.now(),user_from=from_user,chat_file=request.FILES.get("file"))
+    room = tbl_chatroom.objects.get(id=rid)
+    tbl_chat.objects.create(
+        chat_content=request.POST.get("msg"),
+        chat_time=datetime.now(),
+        user_from=from_user,
+        chat_file=request.FILES.get("file"),
+        room_id = room
+    )
     return render(request,"User/Chat.html")
 
-def ajaxchatview(request):
+
+def ajaxchatview(request,rid):
     tid = request.session["uid"]
     user = tbl_user.objects.get(id=request.session["uid"])
-    chat_data = tbl_chat.objects.all().order_by('chat_time')
+    chat_data = tbl_chat.objects.filter(room_id = rid).order_by('chat_time')
     return render(request,"User/ChatView.html",{"data":chat_data,"tid":int(tid)})
     return render(request,"User/ChatView.html")
 

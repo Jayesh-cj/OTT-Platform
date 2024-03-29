@@ -290,11 +290,11 @@
             <div class="head-sec" id="changeable">
                 <div class="content">
                     <div  onclick="open_profile()">
-                        <img src="{{ user.user_photo.url }}" width="40px" height="40px" style="border-radius: 50%;" alt="">
+                        <img src="{{ Room.community_photo.url }}" width="40px" height="40px" style="border-radius: 50%;" alt="">
                         <!-- <img src="https://cdni.autocarindia.com/utils/imageresizer.ashx?n=https://cms.haymarketindia.net/model/uploads/modelimages/Hyundai-Grand-i10-Nios-200120231541.jpg&w=872&h=578&q=75&c=1" width="40px" height="40px" style="border-radius: 50%;" alt=""> -->
                     </div>
                     <div class="font">
-                        {{user.user_name}}
+                        {{ Room.community_name }}
                         <input type="hidden" name="txt_id" id="txt_id" value="{{user.id}}">
                     </div>
                 </div>
@@ -405,7 +405,7 @@
             fd.append("file",file)
             fd.append("tid",tid)
             fd.append("msg",msg)
-            var ur = "{% url 'webuser:ajaxchat' %}"
+            var ur = "{% url 'webuser:ajaxchat' Room.id %}"
             var csrftoken = getCookie('csrftoken');
             $.ajax({
                 type:'POST',
@@ -428,7 +428,7 @@
 
     function viewChat() {
         var id = document.getElementById("txt_id").value
-        var ur = "{% url 'webuser:ajaxchatview' %}"
+        var ur = "{% url 'webuser:ajaxchatview' Room.id %}"
         $.ajax({
             url: ur,
             data: { tid: id, },

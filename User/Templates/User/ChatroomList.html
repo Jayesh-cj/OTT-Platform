@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatrooms</title>
+</head>
+<body>
+    <table>
+        {% for i in List %}
+            <tr>
+                <td><img src="{{ i.community_photo.url }}" alt=""></td>
+                <td>
+                    <a href="{% url 'webuser:chatpage' i.id %}">
+                    <h2>{{ i.community_name }}</h2>
+                    <p>{{ i.community_description }}</p>
+                    {% if i.community_status == 0 %}
+                        <small>Open</small>                  
+                    {% else %}
+                        <small>Closed</small>
+                    {% endif %}
+                </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

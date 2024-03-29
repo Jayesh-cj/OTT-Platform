@@ -18,22 +18,23 @@ class tbl_subscription(models.Model):
     subscription_status=models.IntegerField(default=0)
 
 
-# # Community Table
-# class tbl_community(models.Model):
-#     user_id = models.ForeignKey(tbl_user, on_delete=models.CASCADE, null=True)
-#     community_name = models.CharField(max_length=200)
-#     community_date = models.DateField()
-#     community_photo = models.FileField(upload_to='Files/Community/Profile/')
-#     community_description = models.TextField()
-#     # Open Community = 0
-#     # Closed Community = 1
-#     community_status = models.IntegerField(default=0)
+# Community Table
+class tbl_chatroom(models.Model):
+    user_id = models.ForeignKey(tbl_user, on_delete=models.CASCADE, null=True)
+    community_name = models.CharField(max_length=200)
+    community_date = models.DateField()
+    community_photo = models.FileField(upload_to='Files/Community/Profile/')
+    community_description = models.TextField()
+    # Open Community = 0
+    # Closed Community = 1
+    community_status = models.IntegerField(default=0)
 
-# # Join list Table
-# class tbl_joinlist(models.Model):
-#     community_id = models.ForeignKey(tbl_community, on_delete=models.CASCADE, null=True)
-#     user_id = models.ForeignKey(tbl_user, on_delete=models.CASCADE, null=True)
-#     list_status = models.IntegerField(default=0)
+# Join list Table
+class tbl_joinlist(models.Model):
+    community_id = models.ForeignKey(tbl_chatroom, on_delete=models.CASCADE, null=True)
+    user_id = models.ForeignKey(tbl_user, on_delete=models.CASCADE, null=True)
+    list_status = models.IntegerField(default=0)
+
 
 # # Chat Table
 # class tbl_chat(models.Model):
@@ -95,3 +96,4 @@ class tbl_chat(models.Model):
     chat_file=models.FileField(upload_to='ChatFiles/')
     chat_time=models.DateTimeField()
     user_from=models.ForeignKey(tbl_user,on_delete=models.CASCADE)
+    room_id = models.ForeignKey(tbl_chatroom, on_delete=models.CASCADE,null=True)

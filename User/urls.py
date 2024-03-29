@@ -48,8 +48,12 @@ urlpatterns = [
     path('ajaxrating',views.ajaxrating,name="ajaxrating"),
     path('starrating/',views.starrating,name="starrating"),
 
-    path('chatpage/',views.chatpage,name="chatpage"),
-    path('ajaxchat/',views.ajaxchat,name="ajaxchat"),
-     path('ajaxchatview/',views.ajaxchatview,name="ajaxchatview"),
+
+    path('create chatroom/',views.create_chatroom, name='create_chatroom'),
+    path('Chatromms/',views.chatroom_list, name='chatrooms'),
+
+    path('chatpage/<int:rid>',views.chatpage,name="chatpage"),
+    path('ajaxchat/<int:rid>',views.ajaxchat,name="ajaxchat"),
+    path('ajaxchatview/<int:rid>',views.ajaxchatview,name="ajaxchatview"),
     path('clearchat/',views.clearchat,name="clearchat"),
 ]
