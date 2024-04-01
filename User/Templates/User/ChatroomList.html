@@ -1,3 +1,6 @@
+{% extends "User/Header.html" %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +9,8 @@
     <title>Chatrooms</title>
 </head>
 <body>
+    {% block content %}
+      
     <table>
         {% for i in List %}
             <tr>
@@ -16,7 +21,7 @@
                     <p>{{ i.community_description }}</p>
                     {% if i.community_status == 0 %}
                         <small>Open</small>                  
-                    {% else %}
+                        {% else %}
                         <small>Closed</small>
                     {% endif %}
                 </a>
@@ -24,5 +29,6 @@
             </tr>
         {% endfor %}
     </table>
+    {% endblock content %}
 </body>
 </html>
