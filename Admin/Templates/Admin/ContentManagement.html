@@ -1,27 +1,32 @@
+{% extends "Admin/Header.html" %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Content Management</title>
+    {% block content %}
+      
     <!-- <style>
-
+        
         /* Style the dropdown container */
         .dropdown {
           position: relative;
           display: inline-block;
         }
-    
+        
         /* Style the dropdown button */
         .dropdown button {
-          background-color: #3498db;
+            background-color: #3498db;
           color: #fff;
           padding: 10px;
           font-size: 16px;
           border: none;
           cursor: pointer;
         }
-    
+        
         /* Style the dropdown content (hidden by default) */
         .dropdown-content {
           display: none;
@@ -39,15 +44,15 @@
           text-decoration: none;
           display: block;
         }
-    
+        
         /* Change color on hover */
         .dropdown-content a:hover {
-          background-color: #ddd;
+            background-color: #ddd;
         }
-    
+        
         /* Show the dropdown content when the button is hovered over */
         .dropdown:hover .dropdown-content {
-          display: block;
+            display: block;
         }
         
         .dashboard {
@@ -68,12 +73,12 @@
     <header>
         <a href="{% url 'webadmin:content_display' %}">Content List</a> | <a href="{% url 'webadmin:user_content_manage' %}">User Content List</a>
     </header>
-
+    
     <form action="" method="post">
         {% csrf_token %}
         <table align="center" border="1" width="800px" height="500px">
             {% for i in Details %}
-                <tr>
+            <tr>
                     <td colspan="2" align="center">
                         <h1>{{ i.details_title }}</h1>
                     </td>
@@ -95,7 +100,7 @@
                     <td colspan="2" align="center">
                         {% if i.details_filesize == 0 %}
                             <a href="{% url 'webadmin:content_play' i.id %}"><input type="button" value="Watch"></a>
-                        {% else %}
+                            {% else %}
                             <a href="{% url 'webadmin:series_details' i.id %}"><input type="button" value="List"></a>
                         {% endif %}
                         <a href="{% url 'webadmin:view_trailer' i.id %}"><input type="button" value="Trailer"></a>
@@ -106,3 +111,5 @@
     </form>
 </body>
 </html>
+    
+{% endblock content %}

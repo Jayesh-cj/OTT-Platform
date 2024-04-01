@@ -1,3 +1,5 @@
+{% extends "Admin/Header.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,8 @@
     <title>Package</title>
 </head>
 <body>
+    {% block content %}
+      
     <form action="" method="post">
         <table border="1" align="center">
             {% csrf_token %}
@@ -62,3 +66,5 @@
         // console.log(pid);
     }
 </script>
+            
+{% endblock content %}

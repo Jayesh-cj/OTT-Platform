@@ -1,3 +1,6 @@
+{% extends "Admin/Header.html" %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +9,11 @@
     <title>District</title>
 </head>
 <body>
-    <form action="" method="post">
-        <table border="1" align="center" cellpadding="10">
+
+{% block content %}
+  
+<form action="" method="post">
+    <table border="1" align="center" cellpadding="10">
             {% csrf_token %}
             <tr>
                 <td>District</td>
@@ -41,3 +47,6 @@
     </table>
 </body>
 </html>
+
+
+{% endblock content %}

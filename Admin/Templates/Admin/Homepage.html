@@ -1,100 +1,80 @@
+{% extends "Admin/Header.html" %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
-
-  <style>
-
-  /* Styles for the dropdown */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-  }
-
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 120px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-
-  .dropdown-menu a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-
-  </style>
+{% block content %}
+  
 
 </head>
 <body>
-  <header align="right">
-    <a href="{% url 'webadmin:change_password' %}">Change Password</a>
-  </header>
-    <h1 align="center">Welcome</h1>
 
-    <div class="dashboard">
-        <ul>
-            <li><a href="{% url 'webadmin:category' %}">Category</a></li>
-            <li><a href="{% url 'webadmin:language' %}">Language</a></li>
-            <li><a href="{% url 'webadmin:genre' %}">Genre</a></li>
-        </ul>
+<div class="dummy" style="height: 10px;">
 
-        <div class="dropdown">
-          <label for="dropdown-menu" id="dropdown-label">Upload</label>
-          <div class="dropdown-menu" id="dropdown-menu">
-            <a href="{% url 'webadmin:add_content_details' %}">Content Details</a>
-            <a href="{% url 'webadmin:add_content' %}">Content</a>
-            <a href="{% url 'webadmin:add_series' %}">Series</a>
-            <a href="{% url 'webadmin:add_crew_details' %}">Crew Details</a>
-            <a href="{% url 'webadmin:upload_trailer' %}">Trailer</a>
+</div>
+  <div class="row">
+    <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card shadow mb-4 p-2 rounded-4">
+        <div class="card-body d-flex align-items-center">
+          <div class="icon-box lg shadow-solid-rb border border-dark p-4 rounded-4 me-3">
+            <i class="fs-3 bi bi-camera-reels text-primary"></i>
+          </div>
+          <div class="m-0">
+            <h5 class="fw-light mb-1">Contents</h5>
+            <h2 class="m-0 text-primary">10</h2>
           </div>
         </div>
-
-        <ul>
-            <li><a href="{% url 'webadmin:package' %}">Package Management</a></li>
-
-              <!-- <div class="dropdown">
-                <label for="">Upload</label>
-                <div class="dropdown-content">
-                <a href="{% url 'webadmin:add_content_details' %}">Content Details</a>
-                <a href="{% url 'webadmin:add_content' %}">Content</a>
-                <a href="{% url 'webadmin:add_series' %}">Series</a>
-                <a href="{% url 'webadmin:add_crew_details' %}">Crew Details</a>
-                <a href="{% url 'webadmin:upload_trailer' %}">Trailer</a>
-                </div>
-              </div> -->
-
-            <li><a href="{% url 'webadmin:content_display' %}">Content Management</a></li>
-            <li><a href="{% url 'webadmin:view_complaints' %}">Complaints</a></li>
-            <li><a href="{% url 'webadmin:users_list' %}">Users List</a></li>
-        </ul>
+      </div>
     </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card shadow mb-4 p-2 rounded-4">
+        <div class="card-body d-flex align-items-center">
+          <div class="icon-box lg shadow-solid-rb border border-dark p-4 rounded-4 me-3">
+            <i class="fs-3 bi bi-person text-primary"></i>
+          </div>
+          <div class="m-0">
+            <h5 class="fw-light mb-1">Users</h5>
+            <h2 class="m-0 text-primary">5</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card shadow mb-4 p-2 rounded-4">
+        <div class="card-body d-flex align-items-center">
+          <div class="icon-box lg shadow-solid-rb border border-dark p-4 rounded-4 me-3">
+            <i class="fs-3 bi bi-exclamation-triangle text-primary"></i>
+          </div>
+          <div class="m-0">
+            <h5 class="fw-light mb-1">Complaints</h5>
+            <h2 class="m-0 text-primary">3</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12">
+      <div class="card shadow mb-4 p-2 rounded-4">
+        <div class="card-body d-flex align-items-center">
+          <div class="icon-box lg shadow-solid-rb border border-dark p-4 rounded-4 me-3">
+            <i class="fs-3 bi bi-check2-circle text-primary"></i>
+          </div>
+          <div class="m-0">
+            <h5 class="fw-light mb-1">Feedbacks</h5>
+            <h2 class="m-0 text-primary">4</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
+  
 
 
-
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        var label = document.getElementById("dropdown-label");
-        var menu = document.getElementById("dropdown-menu");
-      
-        label.addEventListener("click", function() {
-          if (menu.style.display === "none" || menu.style.display === "") {
-            menu.style.display = "block";
-          } else {
-            menu.style.display = "none";
-          }
-        });
-      });
-    </script>
+{% endblock content %}
 </body>
 </html>

@@ -1,9 +1,13 @@
+{% extends "Admin/Header.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Content Details</title>
+    {% block content %}
+      
     <style>
         .checkbox-columns {
             column-count: 3;
@@ -14,7 +18,7 @@
             display: block;
             margin-bottom: 5px; /* Adjust the vertical spacing between checkboxes */
         }
-    </style>
+        </style>
 </head>
 <body>
     <form action="" method="post" enctype="multipart/form-data">
@@ -39,7 +43,7 @@
                     <select name="sel_category" id="">
                         <option value="">---Select---</option>
                         {% for i in Category %}
-                            <option value="{{ i.id }}"> {{ i.category_name }} </option>
+                        <option value="{{ i.id }}"> {{ i.category_name }} </option>
                         {% endfor %}
                     </select>
                 </td>
@@ -50,7 +54,7 @@
                     <select name="sel_language" id="">
                         <option value="">---Select---</option>
                         {% for i in Language %}
-                            <option value="{{ i.id }}"> {{ i.language_name }} </option>
+                        <option value="{{ i.id }}"> {{ i.language_name }} </option>
                         {% endfor %}
                     </select>
                 </td>
@@ -96,5 +100,6 @@
         </table>
     </form>
     <br><br>
+    {% endblock content %}
 </body>
 </html>

@@ -1,3 +1,6 @@
+{% extends "Admin/Header.html" %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +9,8 @@
     <title>Content Play</title>
 </head>
 <body>
+    {% block content %}
+      
     <table align="center">
         <tr>
             <td align="center"><h1>{{ Content_data.details_id.details_title }} Season {{ Content_data.content_season }} Episode {{ Content_data.content_episode}}</h1></td>
@@ -18,7 +23,7 @@
         <tr>
             <td>
                 {% if Content_data.details_id.details_filesize == 0 %}
-                    Description : <b>{{ Content_data.details_id.details_description }}</b><br>
+                Description : <b>{{ Content_data.details_id.details_description }}</b><br>
                 {% else %}
                     Episode Title : <b>{{ Content_data.content_title }}</b> <br>
                     Episode Description : <b>{{ Content_data.content_description }}</b><br>
@@ -32,3 +37,5 @@
     </table>
 </body>
 </html>
+
+{% endblock content %}

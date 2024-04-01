@@ -1,3 +1,6 @@
+{% extends "Admin/Header.html" %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +9,11 @@
     <title>Add Crew Details</title>
 </head>
 <body>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table align="center">
+{% block content %}
+  
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table align="center">
             <caption align="top"><h1 align="center">Add Crew Details</h1></caption>
             <tr>
                 <td>Content Title</td>
@@ -16,7 +21,7 @@
                     <select name="sel_title" id="">
                         <option value="">---Select---</option>
                         {% for i in Details %}
-                            <option value="{{ i.id }}">{{ i.details_title }}</option>
+                        <option value="{{ i.id }}">{{ i.details_title }}</option>
                         {% endfor %}
                     </select>
                 </td>
@@ -43,3 +48,4 @@
     </form>
 </body>
 </html>
+        {% endblock content %}  

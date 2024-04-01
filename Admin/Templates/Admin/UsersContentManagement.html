@@ -1,3 +1,5 @@
+{% extends "Admin/Header.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,8 @@
     <title>Users Content</title>
 </head>
 <body>
+    {% block content %}
+      
     <header>
         <a href="{% url 'webadmin:content_display' %}">Content List</a> | <a href="{% url 'webadmin:user_content_manage' %}">User Content List</a>
     </header>
@@ -14,8 +18,8 @@
         {% csrf_token %}
         <table align="center" border="1" width="1000px" height="500px">
             {% for i in Details %}
-                <tr>
-                    <td colspan="3" align="center">
+            <tr>
+                <td colspan="3" align="center">
                         <h1>{{ i.details_title }}</h1>
                     </td>
                 </tr>
@@ -29,7 +33,7 @@
                         Language : {{ i.language_id.language_name }} <br>
                         Genre : {{ i.details_genres }} <br>
                         <!-- Duration : {{ i.content_duration }} hr <br>
-                        Release Date : {{ i.content_release_date }} -->
+                            Release Date : {{ i.content_release_date }} -->
                     </td>
                     <td>
                         <a href="{% url 'webadmin:accept_content' i.id %}">Accept</a> | <a href="{% url 'webadmin:reject_content' i.id %}">Reject</a>
@@ -39,14 +43,16 @@
                     <td colspan="3" align="center">
                         {% if i.details_filesize == 0 %}
                             <a href="{% url 'webadmin:content_play' i.id %}"><input type="button" value="Watch"></a>
-                        {% else %}
+                            {% else %}
                             <a href="{% url 'webadmin:series_details' i.id %}"><input type="button" value="List"></a>
-                        {% endif %}
-                        <a href="{% url 'webadmin:view_trailer' i.id %}"><input type="button" value="Trailer"></a>
-                    </td>
-                </tr>
+                            {% endif %}
+                            <a href="{% url 'webadmin:view_trailer' i.id %}"><input type="button" value="Trailer"></a>
+                        </td>
+                    </tr>
             {% endfor %}
         </table>
     </form>
 </body>
 </html>
+
+{% endblock content %}

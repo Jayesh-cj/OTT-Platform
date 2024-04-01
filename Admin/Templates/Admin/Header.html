@@ -1,0 +1,251 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Bootstrap Gallery - Mercury Admin Template</title>
+
+		<!-- Meta -->
+		<meta name="description" content="Marketplace for Bootstrap Admin Dashboards" />
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="canonical" href="https://www.bootstrap.gallery/">
+		<meta property="og:url" content="https://www.bootstrap.gallery">
+		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+		<meta property="og:type" content="Website">
+		<meta property="og:site_name" content="Bootstrap Gallery">
+		<link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %} " />
+
+		<!-- *************
+			************ CSS Files *************
+		************* -->
+		<link rel="stylesheet" href="{% static 'Admin/assets/fonts/bootstrap/bootstrap-icons.css' %} " />
+		<link rel="stylesheet" href="{% static 'Admin/assets/css/main.min.css' %} " />
+
+		<!-- *************
+			************ Vendor Css Files *************
+		************ -->
+
+		<!-- Scrollbar CSS -->
+		<link rel="stylesheet" href="{% static 'Admin/assets/vendor/overlay-scroll/OverlayScrollbars.min.css' %} " />
+	</head>
+
+	<body>
+		<!-- Page wrapper start -->
+		<div class="page-wrapper">
+
+			<!-- Main container start -->
+			<div class="main-container">
+
+				<!-- Sidebar wrapper start -->
+				<nav id="sidebar" class="sidebar-wrapper">
+
+					<!-- App brand starts -->
+					<div class="app-brand px-3 py-3 d-flex align-items-center">
+						<a href="index.html">
+							<!-- <img src="{% static 'Admin/assets/images/logo.svg' %} " class="logo" alt="Bootstrap Gallery" /> -->
+						</a>
+					</div>
+					<!-- App brand ends -->
+
+					<!-- Sidebar profile starts -->
+					<div class="sidebar-user-profile">
+						<img src="{% static 'Admin/assets/images/user.png' %} " class="profile-thumb rounded-circle p-2 d-lg-flex d-none"
+							alt="Bootstrap Gallery" />
+						<h5 class="profile-name lh-lg mt-2 text-truncate">Michelle Max</h5>
+					</div>
+					<!-- Sidebar profile ends -->
+
+					<!-- Sidebar menu starts -->
+					<div class="sidebarMenuScroll">
+						<ul class="sidebar-menu">
+							<li class="active current-page">
+								<a href="{% url 'webadmin:homepage' %}">
+									<i class="fs-3 bi bi-house-door"></i>
+									<span class="menu-text">Dashboard</span>
+								</a>
+							</li>
+
+							<li class="treeview">
+								<a href="#!">
+									<i class="fs-3 bi bi-filter-left"></i>
+									<span class="menu-text">Basic Data Entries</span>
+								</a>
+								<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'webadmin:category' %}">Category</a>
+									</li>
+									<li>
+										<a href="{% url 'webadmin:language' %}">Language</a>
+									</li>
+									<li>
+										<a href="{% url 'webadmin:genre' %}">Genre</a>
+									</li>
+								</ul>
+							</li>
+							
+							<li class="treeview">
+								<a href="#!">
+									<i class="fs-3 bi bi-camera-reels"></i>
+									<span class="menu-text">Content Management</span>
+								</a>
+								<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'webadmin:add_content_details' %}">Upload</a>
+									</li>
+									<li>
+										<a href="{% url 'webadmin:content_display' %}">Existing Contents</a>
+									</li>
+								</ul>
+							</li>
+
+							<li>
+								<a href="{% url 'webadmin:package' %}">
+									<i class="fs-3 bi bi-credit-card-2-back"></i>
+									<span class="menu-text">Package Management</span>
+								</a>
+							</li>
+							
+							<li>
+								<a href="{% url 'webadmin:users_list' %}">
+									<i class="fs-3 bi bi-person"></i>
+									<span class="menu-text">Users</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'webadmin:view_complaints' %}">
+									<i class="fs-3 bi bi-exclamation-triangle"></i>
+									<span class="menu-text">Complaints</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'webuser:feedback' %}">
+									<i class="fs-3 bi bi-check2-circle"></i>
+									<span class="menu-text">Feedback</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- Sidebar menu ends -->
+
+				</nav>
+				<!-- Sidebar wrapper end -->
+
+				<!-- App container starts -->
+				<div class="app-container">
+
+					<!-- App header starts -->
+					<div class="app-header d-flex align-items-center">
+
+						<!-- Toggle buttons start -->
+						<div class="d-flex">
+							<button class="btn btn-outline-primary me-2 toggle-sidebar" id="toggle-sidebar">
+								<i class="bi bi-chevron-left fs-5"></i>
+							</button>
+							<button class="btn btn-outline-primary me-2 pin-sidebar" id="pin-sidebar">
+								<i class="bi bi-chevron-left fs-5"></i>
+							</button>
+						</div>
+						<!-- Toggle buttons end -->
+
+						<!-- App brand sm start -->
+						<div class="app-brand-sm d-md-none d-sm-block">
+							<a href="index.html">
+								<img src="{% static 'Admin/assets/images/logo-sm.svg' %} " class="logo" alt="Bootstrap Gallery">
+							</a>
+						</div>
+						<!-- App brand sm end -->
+
+						<!-- App header actions start -->
+						<div class="header-actions">
+							<div class="d-lg-block d-none me-2">
+
+								<!-- Search container start -->
+								<!-- <div class="input-group">
+									<input type="text" class="form-control" placeholder="Search" />
+									<button class="btn btn-outline-primary" type="button">
+										<i class="bi bi-search fs-5"></i>
+									</button>
+								</div>	 -->
+								<!-- Search container end -->
+
+							</div>
+
+							<div class="dropdown ms-3">
+								<a id="userSettings" class="dropdown-toggle d-flex py-2 align-items-center text-decoration-none"
+									href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<span class="d-none d-md-block me-2">Michelle Max</span>
+									<img src="{% static 'Admin/assets/images/user.png' %} " class="rounded-circle img-3x" alt="Bootstrap Gallery" />
+								</a>
+								<div class="dropdown-menu dropdown-menu-end shadow">
+									<!-- <a class="dropdown-item d-flex align-items-center" href="{% url 'webuser:show_profile' %}"><i
+											class="bi bi-person fs-4 me-2"></i>Profile</a> -->
+									<a class="dropdown-item d-flex align-items-center" href="{% url 'webadmin:change_password' %}"><i
+											class="bi bi-gear fs-4 me-2"></i>Change Password</a>
+									<a class="dropdown-item d-flex align-items-center" href="login.html"><i
+											class="bi bi-escape fs-4 me-2"></i>Logout</a>
+								</div>
+							</div>
+						</div>
+						<!-- App header actions end -->
+
+					</div>
+					<!-- App header ends -->
+
+
+
+					
+				
+
+					{% block content %}
+			  
+					{% endblock content %}
+
+					<!-- App footer start -->
+					<!-- <div class="app-footer">
+						<span>© Bootstrap Gallery 2023</span>
+					</div> -->
+					<!-- App footer end -->
+
+				</div>
+				<!-- App container ends -->
+
+			</div>
+			<!-- Main container end -->
+
+		</div>
+		<!-- Page wrapper end -->
+
+		<!-- *************
+			************ JavaScript Files *************
+		************* -->
+		<!-- Required jQuery first, then Bootstrap Bundle JS -->
+		<script src="{% static 'Admin/assets/js/jquery.min.js' %} "></script>
+		<script src="{% static 'Admin/assets/js/bootstrap.bundle.min.js' %} "></script>
+
+		<!-- *************
+			************ Vendor Js Files *************
+		************* -->
+
+		<!-- Overlay Scroll JS -->
+		<script src="{% static 'Admin/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js' %} "></script>
+		<script src="{% static 'Admin/assets/vendor/overlay-scroll/custom-scrollbar.js' %} "></script>
+
+		<!-- Apex Charts -->
+		<script src="{% static 'Admin/assets/vendor/apex/apexcharts.min.js' %} "></script>
+		<script src="{% static 'Admin/assets/vendor/apex/custom/dash1/sales.js' %} "></script>
+		<script src="{% static 'Admin/assets/vendor/apex/custom/dash1/sparkline.js' %} "></script>
+		<script src="{% static 'Admin/assets/vendor/apex/custom/dash1/sparkline2.js' %} "></script>
+
+		<!-- Rating -->
+		<script src="{% static 'Admin/assets/vendor/rating/raty.js' %} "></script>
+		<script src="{% static 'Admin/assets/vendor/rating/raty-custom.js' %} "></script>
+
+		<!-- Custom JS files -->
+		<script src="{% static 'Admin/assets/js/custom.js' %} "></script>
+	</body>
+
+</html>
