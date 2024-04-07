@@ -7,9 +7,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatrooms</title>
+    {% block content %}
+    <style>
+        a{
+            text-decoration: none;        }
+        .nav-links{
+            justify-content: space-evenly;
+            display: flex;
+            height: 50px;
+            background-color: aliceblue;
+        }
+        .nav-links-child{
+            padding: 12px;
+            width: 100%;
+        }
+        .nav-links-child:hover{
+            transform: scale(1.2);
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    {% block content %}
+
+    <div class="nav-links">
+        <a href="{% url 'webuser:chatrooms' %}">
+            <div class="nav-links-child">List</div>
+        </a>
+        <a href="{% url 'webuser:create_chatroom' %}">
+            <div class="nav-links-child">Create</div>
+        </a>
+    </div>
       
     <table>
         {% for i in List %}
@@ -23,7 +50,13 @@
                         <small>Open</small>                  
                         {% else %}
                         <small>Closed</small>
+                    {% endif %} <br>    
+                    {% if i.user_id.id == User %}
+                      View
+                    {% else %}
+                      Join
                     {% endif %}
+                    
                 </a>
                 </td>
             </tr>

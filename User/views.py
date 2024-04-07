@@ -524,15 +524,18 @@ def starrating(request):
 
 # Chatroom List 
 def chatroom_list(request):
+    user = request.session['uid']
     list = tbl_chatroom.objects.all()
     return render(request,'User/ChatroomList.html',{
-        'List':list
+        'List':list,
+        'User':user
     })
 
 
 # Create Chatrrom 
 def create_chatroom(request):
-    user = request.session['uid']
+    user = tbl_user.objects.get(id = request.session['uid'])
+
     # print(user)
     if request.method == 'POST':
         tbl_chatroom.objects.create(

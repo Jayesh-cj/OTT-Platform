@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% extends "User/Header.html" %}<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,9 +7,10 @@
     <link rel="icon" href="../../../Files/LoDi-Cinemate an OTT Platform logo that include camera-2024-03-05-10_45_08-mwcre2motohqua0lam5uh.png" type="image/x-icon">
     <link rel="shortcut icon" href="../../../Files/LoDi-Cinemate an OTT Platform logo that include camera-2024-03-05-10_45_08-mwcre2motohqua0lam5uh.png" type="image/x-icon">
 
-
-    <style>
-
+{% block content %}
+  
+<style>
+    
         body{
             padding: 0;
             margin: 0;
@@ -160,7 +161,7 @@ a{
   }
 
   .dropdown-menu {
-    display: none;
+      display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 120px;
@@ -237,10 +238,10 @@ a{
             </div>
         </div>
         
-
-
-
-
+        
+        
+        
+        
         <!-- <div class="main-container">
             <div>
                 <h1>{{ Details.details_title }}</h1>
@@ -288,3 +289,4 @@ a{
     </script>
 </body>
 </html>
+              {% endblock content %}

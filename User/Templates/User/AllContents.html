@@ -1,21 +1,45 @@
+{% extends "User/Header.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contents</title>
+
+{% block content %}
+  <style>
+    img {
+      width: 300px; /* Set a fixed width to the images */
+      /* Adjust the value as per your requirements */
+    }
+    a{
+        text-decoration: none;
+    }
+  </style>
 </head>
 <body>
     <form action="" method="post">
-        <div class="grid-container">
+        <table>
             {% for i in Details %}
-                <a href="{% url 'webuser:content_details' i.id %}">
-                    <div class="grid-item">
-                        <img src="{{ i.details_photo.url }}" alt="Not Found">
-                    </div>
-                </a>
+                <tr>
+                    <td>
+                        <a href="{% url 'webuser:content_details' i.id %}">
+                            <img src="{{ i.details_photo.url }}" alt="Not Found">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'webuser:content_details' i.id %}">
+                            <h1>{{ i.details_title }}</h1>
+                            <p>{{ i.details_description }}</p>
+                        </a>
+                    </td>
+                </tr>
+            </a>
             {% endfor %}
-        </div>
+        </table>
     </form>
 </body>
 </html>
+    
+{% endblock content %}
