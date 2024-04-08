@@ -6,41 +6,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Category</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 {% block content %}
   
 <form action="" method="post">
     {% csrf_token %}
-        <table align="center" cellpadding="10">
-            <tr>
-                <td>Category</td>
-                <td><input type="text" name="txt_category" id="" value="{{ Cdata.category_name }}"></td>
+    <div class="container">
+        <div class="form-group">
+            <label for="txt_category">Category</label>
+            <input type="text" class="form-control" id="txt_category" name="txt_category" value="{{ Cdata.category_name }}">
+        </div>
+        <button type="submit" class="btn btn-primary" name="btn_save">Add</button>
+        <button type="reset" class="btn btn-secondary" name="btn_cancel">Cancel</button>
+    </div>
+</form>
+<br><br>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr align="center">
+                <th>SL.no</th>
+                <th>Category</th>
+                <th>Action</th>
             </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="Save" name="btn_save">
-                    <input type="reset" value="Cancel" name="btn_cancel">
-                </td>
-            </tr>
-        </table>
-    </form>
-    <br><br>
-    <table align="center" cellpadding="10" width="100%">
-        <tr>
-            <th>SL.no</th>
-            <th>Category</th>
-            <th colspan="2" align="center">Action</th>
-        </tr>
-        {% for i in Cat_data %}
-        <tr>
+        </thead>
+        <tbody>
+            {% for i in Cat_data %}
+            <tr align="center">
                 <td>{{ forloop.counter }}</td>
                 <td>{{ i.category_name }}</td>
-                <td><a href="{% url 'webadmin:del_category' i.id %}">Delete</a></td>
-                <td><a href="{% url 'webadmin:edit_category' i.id %}">Edit</a></td>
+                <td>
+                    <a href="{% url 'webadmin:del_category' i.id %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'webadmin:edit_category' i.id %}" class="btn btn-warning">Edit</a>
+                </td>
             </tr>
             {% endfor %}
-        </table>
-    </body>
+        </tbody>
+    </table>
+</div>
+</body>
 </html>
-    {% endblock content %}
+{% endblock content %}

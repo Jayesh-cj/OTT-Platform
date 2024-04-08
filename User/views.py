@@ -367,9 +367,9 @@ def view_watchlist_contents(request,wid):
 
 # Delete Content From Watchlist 
 def delete_from_watchlist(request,rid):
-    w_content = tbL_watchlist_content.objects.get(id=rid)
+    w_content = tbL_watchlist_content.objects.get(id=rid).delete()
     # print(w_content)
-    pass
+    return redirect('webuser:create_watchlist')
 
 
 # Crew Details Insert 

@@ -9,10 +9,34 @@
 </head>
 <body>
     {% block content %}
+    <style>
+        a{
+            text-decoration: none;        
+        }
+        .nav-links{
+            justify-content: space-evenly;
+            display: flex;
+            height: 50px;
+            background-color: aliceblue;
+        }
+        .nav-links-child{
+            padding: 12px;
+            width: 100%;
+        }
+        .nav-links-child:hover{
+            transform: scale(1.2);
+            color: black;
+        }
+    </style>
       
-    <header>
-        <a href="{% url 'webadmin:content_display' %}">Content List</a> | <a href="{% url 'webadmin:user_content_manage' %}">User Content List</a>
-    </header>
+    <div class="nav-links">
+        <a href="{% url 'webadmin:content_display' %}">
+            <div class="nav-links-child">Content List</div>
+        </a>
+        <a href="{% url 'webadmin:user_content_manage' %}">
+            <div class="nav-links-child">User Content List</div>
+        </a>
+    </div>
 
     <form action="" method="post">
         {% csrf_token %}
