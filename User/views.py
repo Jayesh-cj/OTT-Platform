@@ -275,13 +275,6 @@ def check_content_ststus(request):
     })
 
 
-# All Contents Display 
-def all_contents_display(request):
-    details = tbl_content_details.objects.all()
-    return render(request,'User/AllContents.html',{
-        'Details':details
-    })
-
 # Display Content Details 
 def content_details(request,cid):
     user = request.session['uid']
@@ -585,3 +578,16 @@ def ajaxchatview(request,rid):
 def clearchat(request):
     tbl_chat.objects.filter(Q(user_from=request.session["uid"]) & Q(user_to=request.GET.get("tid")) | (Q(user_from=request.GET.get("tid")) & Q(user_to=request.session["uid"]))).delete()
     return render(request,"ChatApp/ClearChat.html",{"msg":"Chat Deleted Sucessfully...."})
+
+# All Contents Display 
+def all_contents_display(request):
+    details = tbl_content_details.objects.all()
+    return render(request,'User/AllContents.html',{
+        'Details':details
+    })
+
+
+def AjaxSearch(request):
+    word=request.GET.get("word")
+    data=tbl_content_details.objects.filter(details_title__istartswith=word)
+    return render(request,"User/Ajaxsearch.html",{'data':data})

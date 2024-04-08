@@ -159,12 +159,14 @@
 							<div class="d-lg-block d-none me-2">
 
 								<!-- Search container start -->
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search" />
-									<button class="btn btn-outline-primary" type="button">
-										<i class="bi bi-search fs-5"></i>
-									</button>
-								</div>
+								<form action="" method="post" id="SearchForm"  onkeyup="getMovie()">
+									<div class="input-group">
+										<input type="text" id="search" class="form-control" placeholder="Search" />
+										<button class="btn btn-outline-primary" type="button">
+											<i class="bi bi-search fs-5"></i>
+										</button>
+									</div>
+								</form>
 								<!-- Search container end -->
 
 							</div>
@@ -237,6 +239,34 @@
 
 		<!-- Custom JS files -->
 		<script src="{% static 'User/assets/js/custom.js' %} "></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        // $("#search").change(function () {
+        //     var search = $(this).val();
+        //     var ur = $("#SearchForm").attr("data-places-url");
+        //     $.ajax({
+        //         url: ur,
+        //         data: { disid: did, },
+        //         success: function (data) {
+        //             $("#place").html(data);
+        //         },
+        //     });
+        // });
+		function getMovie(){
+			var word=document.getElementById("search").value;
+			var ur="{% url 'webuser:ajax_search'  %}"
+			$.ajax({
+                url: ur,
+                data: { word: word, },
+                success: function (data) {
+                    $("#search-result").html(data);
+                },
+            });
+		}
+	</script>
+
 	</body>
 
 </html>

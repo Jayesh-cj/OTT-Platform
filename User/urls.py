@@ -25,7 +25,6 @@ urlpatterns = [
     # path('Add Crew Details/',views.add_crew_details, name='add_c'),
     path('Conten Status/',views.check_content_ststus, name='check_content_status'),
 
-    path('All Contents/',views.all_contents_display, name="display_all_contents"),
     path('ContentDetails/<int:cid>',views.content_details, name="content_details"),
     # path('SeriesList/<int:cid>',views.series_episode_list, name="episode_list"),
     path('EpisodeDetails/<int:cid>',views.episode_details, name="episode_details"),
@@ -56,4 +55,8 @@ urlpatterns = [
     path('ajaxchat/<int:rid>',views.ajaxchat,name="ajaxchat"),
     path('ajaxchatview/<int:rid>',views.ajaxchatview,name="ajaxchatview"),
     path('clearchat/',views.clearchat,name="clearchat"),
+
+
+    path('All Contents/',views.all_contents_display, name="display_all_contents"),
+    path('AjaxSearch/', views.AjaxSearch, name="ajax_search"),
 ]
