@@ -21,7 +21,7 @@
       <div class="card shadow mb-4 p-2 rounded-4">
         <div class="card-body d-flex align-items-center">
           <div class="icon-box lg shadow-solid-rb border border-dark p-4 rounded-4 me-3">
-            <i class="fs-3 bi bi-camera-reels text-primary"></i>
+            <a href="{% url 'webadmin:content_display' %}"><i class="fs-3 bi bi-camera-reels text-primary"></i></a>
           </div>
           <div class="m-0">
             <h5 class="fw-light mb-1">Contents</h5>
@@ -34,7 +34,7 @@
       <div class="card shadow mb-4 p-2 rounded-4">
         <div class="card-body d-flex align-items-center">
           <div class="icon-box lg shadow-solid-rb border border-dark p-4 rounded-4 me-3">
-            <i class="fs-3 bi bi-person text-primary"></i>
+            <a href="{% url 'webadmin:users_list' %}"><i class="fs-3 bi bi-person text-primary"></i></a>
           </div>
           <div class="m-0">
             <h5 class="fw-light mb-1">Users</h5>
@@ -47,7 +47,7 @@
       <div class="card shadow mb-4 p-2 rounded-4">
         <div class="card-body d-flex align-items-center">
           <div class="icon-box lg shadow-solid-rb border border-dark p-4 rounded-4 me-3">
-            <i class="fs-3 bi bi-exclamation-triangle text-primary"></i>
+            <a href="{% url 'webadmin:view_complaints' %}"><i class="fs-3 bi bi-exclamation-triangle text-primary"></i></a>
           </div>
           <div class="m-0">
             <h5 class="fw-light mb-1">Complaints</h5>
@@ -60,7 +60,7 @@
       <div class="card shadow mb-4 p-2 rounded-4">
         <div class="card-body d-flex align-items-center">
           <div class="icon-box lg shadow-solid-rb border border-dark p-4 rounded-4 me-3">
-            <i class="fs-3 bi bi-check2-circle text-primary"></i>
+            <a href="{% url 'webuser:feedback' %}"><i class="fs-3 bi bi-check2-circle text-primary"></i></a>
           </div>
           <div class="m-0">
             <h5 class="fw-light mb-1">Feedbacks</h5>

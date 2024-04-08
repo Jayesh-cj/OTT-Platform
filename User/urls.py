@@ -35,6 +35,7 @@ urlpatterns = [
     path('AddContentIntoWatchlist/<int:wid>/<int:cid>', views.add_content_in_watchlit, name="add_content_in_watchlist"),
     path('Create Watchlist/',views.create_watchlist, name='create_watchlist'),
     path('View Watchlist Contents/<int:wid>',views.view_watchlist_contents, name="view_watchlist_contents"),
+    path('Remove Content From Watchlist/<int:rid>',views.delete_from_watchlist, name='remove_from_watchlist'),
 
     path('Review Content/',views.review_contents, name="review_content"),
     
@@ -46,7 +47,6 @@ urlpatterns = [
     path('rating/<str:cid>',views.rating,name="rating"),
     path('ajaxrating',views.ajaxrating,name="ajaxrating"),
     path('starrating/',views.starrating,name="starrating"),
-
 
     path('create chatroom/',views.create_chatroom, name='create_chatroom'),
     path('Chatromms/',views.chatroom_list, name='chatrooms'),
@@ -61,4 +61,5 @@ urlpatterns = [
 
     path('All Contents/',views.all_contents_display, name="display_all_contents"),
     path('AjaxSearch/', views.AjaxSearch, name="ajax_search"),
+    path('Logout/',views.logout, name="logout"),
 ]

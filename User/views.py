@@ -32,23 +32,32 @@ def check_age(uid):
     return age
 
 
+# Header 
+def header(request):
+    user = tbl_user.objects.get(id=request.session['uid'])
+    return render(request,'User/Header.html',{
+        'User':user
+    })  
+
 # Homepage
 def homepage(request):
-    first = tbl_content_details.objects.first()
-    content_details = tbl_content_details.objects.all()
-    new_arrivals = tbl_content_details.objects.order_by('-id')
-    user=request.session["uid"]
-    subscribed = check_subscription(user)
-    mager = check_age(user)
+    if 'uid' in request.session:
+        first = tbl_content_details.objects.first()
+        content_details = tbl_content_details.objects.all()
+        new_arrivals = tbl_content_details.objects.order_by('-id')
+        user=request.session["uid"]
+        subscribed = check_subscription(user)
+        mager = check_age(user)
 
-    return render(request,'User/Homepage.html',{
-        'Details':content_details,
-        'Subscribed':subscribed,
-        'New':new_arrivals,
-        'First':first,
-        'Mager':mager
-    })
-
+        return render(request,'User/Homepage.html',{
+            'Details':content_details,
+            'Subscribed':subscribed,
+            'New':new_arrivals,
+            'First':first,
+            'Mager':mager
+        })
+    else:
+        return redirect('webguest:landig_page')
 
 # My Profile 
 def show_profie(request):
@@ -352,8 +361,15 @@ def view_watchlist_contents(request,wid):
     user = tbl_user.objects.get(id=request.session['uid'])
     list_contents = tbL_watchlist_content.objects.filter(watchlist_id = wid)
     return render(request,'User/WatchlistContents.html',{
-        'ContentList':list_contents
+        'ContentList':list_contents,
+        'User':user
     })
+
+# Delete Content From Watchlist 
+def delete_from_watchlist(request,rid):
+    w_content = tbL_watchlist_content.objects.get(id=rid)
+    # print(w_content)
+    pass
 
 
 # Crew Details Insert 
@@ -624,3 +640,12 @@ def AjaxSearch(request):
     word=request.GET.get("word")
     data=tbl_content_details.objects.filter(details_title__istartswith=word)
     return render(request,"User/Ajaxsearch.html",{'data':data})
+
+
+# Log Out 
+def logout(request):
+    if 'uid' in request.session:
+        del request.session['uid']
+        return redirect('webguest:user_login')
+    else:
+        return redirect('webguest:user_login')

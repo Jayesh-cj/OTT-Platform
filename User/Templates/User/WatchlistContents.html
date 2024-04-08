@@ -14,14 +14,30 @@
         th{
             background-color: aquamarine;
         }
+        a{
+            text-decoration: none;
+            position: relative;
+        }
+        .thumbnail {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            display: none;
+            width: 200px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        a:hover .thumbnail {
+            display: block;
+        }
     </style>
+    
 </head>
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        <table align="center" width="75%">
+        <table align="center" width="100%">
             <caption align="top"><h1></h1></caption>
-            <tr>
+            <tr align="center">
                 <th>SL.NO</th>
                 <th>Content Name</th>
                 <th>Date Added</th>
@@ -32,10 +48,16 @@
             <tr align="center">
                 <td>{{ forloop.counter }}</td>
                 <td>
-                    <a href="{% url 'webuser:content_details' i.id %}">{{ i.details_id.details_title }}</a>
+                    <a href="{% url 'webuser:content_details' i.id %}">
+                        {{ i.details_id.details_title }}
+                        <div class="thumbnail">
+                            <img src="{{ i.details_id.details_photo.url }}" alt="{{ i.details_id.details_title }} thumbnail" style="max-width: 100px; max-height: 100px;">
+                        </div>
+                    </a>
                 </td>
                 <td>{{ i.wlist_date }} </td>
-                <td><a href="{%  url 'webuser:rating' i.id %}".>Rate</a></td>
+                <td><a href="{%  url 'webuser:rating' i.id %}">Rate</a></td>
+                <td><a href="{% url 'webuser:remove_from_watchlist' i.id %}">Remove</a></td>
             </tr>
             {% endfor %}
         </table>
