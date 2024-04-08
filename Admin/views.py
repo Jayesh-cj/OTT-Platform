@@ -2,7 +2,7 @@ import re
 from django.shortcuts import render,redirect
 
 from Admin.models import *
-from User.models import tbl_complaint
+from User.models import tbl_complaint, tbl_feedback
 # from User.models import tbl_user
 
 # Create your views here.
@@ -11,8 +11,16 @@ from User.models import tbl_complaint
 # Homepage
 def homepage(request):
     admin=tbl_admin.objects.get(id=request.session['aid'])
+    c_count = tbl_content_details.objects.all().count()
+    u_count = tbl_user.objects.all().count()
+    cmp_count = tbl_complaint.objects.count()
+    f_count = tbl_feedback.objects.all().count()
     return render(request,"Admin/Homepage.html",{
-        'data':admin
+        'data':admin,
+        'Content':c_count,
+        'User':u_count,
+        'Complaint':cmp_count,
+        'Feedback':f_count
     })
 
 # Change Password

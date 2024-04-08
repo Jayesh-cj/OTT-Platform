@@ -519,11 +519,44 @@ def starrating(request):
 def chatroom_list(request):
     user = request.session['uid']
     list = tbl_chatroom.objects.all()
+    # Join = tbl_joinlist.objects.filter(user_id=user)
     return render(request,'User/ChatroomList.html',{
         'List':list,
-        'User':user
+        'User':user,
+        # 'Join':Join
     })
 
+# Join Chatroom 
+def join_chatroom(request,jid):
+    user = request.session['uid']
+    user = tbl_user.objects.get(id=request.session['uid'])
+    room = tbl_chatroom.objects.get(id=jid)
+    tbl_joinlist.objects.create(
+        user_id = user,
+        room_id = room,
+        list_status =1
+    )
+    # if room.community_status == 0:
+    #     print('0')
+    # else:
+    #     print('1')
+    return render(request,'User/Chat.html',{
+        "user":user,
+        'Room':room
+    })
+
+# Joined Chatroom list 
+def joined_chatroom_list(request):
+    user = tbl_user.objects.get(id=request.session['uid'])
+    created = tbl_chatroom.objects.filter(user_id=user)
+    List = tbl_joinlist.objects.filter(
+        user_id=user,
+        list_status = 1    
+    )
+    return render(request,'User/Chatroomlist-Joined.html',{
+        'List':List,
+        'Created':created
+    })
 
 # Create Chatrrom 
 def create_chatroom(request):

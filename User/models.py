@@ -31,7 +31,7 @@ class tbl_chatroom(models.Model):
 
 # Join list Table
 class tbl_joinlist(models.Model):
-    community_id = models.ForeignKey(tbl_chatroom, on_delete=models.CASCADE, null=True)
+    room_id = models.ForeignKey(tbl_chatroom, on_delete=models.CASCADE, null=True)
     user_id = models.ForeignKey(tbl_user, on_delete=models.CASCADE, null=True)
     list_status = models.IntegerField(default=0)
 

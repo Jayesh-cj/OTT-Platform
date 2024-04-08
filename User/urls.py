@@ -50,6 +50,8 @@ urlpatterns = [
 
     path('create chatroom/',views.create_chatroom, name='create_chatroom'),
     path('Chatromms/',views.chatroom_list, name='chatrooms'),
+    path('Joined List/',views.joined_chatroom_list, name='joined_list'),
+    path('JoinCommunity/<int:jid>',views.join_chatroom, name='join_chatroom'),
 
     path('chatpage/<int:rid>',views.chatpage,name="chatpage"),
     path('ajaxchat/<int:rid>',views.ajaxchat,name="ajaxchat"),

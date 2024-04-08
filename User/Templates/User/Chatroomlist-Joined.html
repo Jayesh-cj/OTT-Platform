@@ -42,7 +42,7 @@
     </div>
       
     <table>
-        {% for i in List %}
+        {% for i in Created %}
             <tr>
                 <td><img src="{{ i.community_photo.url }}" alt=""></td>
                 <td>
@@ -53,11 +53,32 @@
                         {% else %}
                         <small>Closed</small>
                     {% endif %} <br>    
-                    {% if i.user_id.id == User %}
-                        <a href="{% url 'webuser:chatpage' i.id %}">View</a>  
-                    {% else %}
-                        <a href="{% url 'webuser:join_chatroom' i.id %}">Join</a>
-                    {% endif %}
+                    <a href="{% url 'webuser:chatpage' i.id %}" class="btn" >View</a>  
+                    <!-- {% if i.user_id.id == User %} -->
+                    <!-- {% else %} -->
+                        <!-- <a href="{% url 'webuser:join_chatroom' i.id %}">Join</a> -->
+                    <!-- {% endif %} -->
+                </td>
+            </tr>
+        {% endfor %}
+
+        
+        {% for i in List %}
+            <tr>
+                <td><img src="{{ i.room_id.community_photo.url }}" alt=""></td>
+                <td>
+                    <h2>{{ i.room_id.community_name }}</h2>
+                    <p>{{ i.room_id.community_description }}</p>
+                    {% if i.room_id.community_status == 0 %}
+                        <small>Open</small>                  
+                        {% else %}
+                        <small>Closed</small>
+                    {% endif %} <br>    
+                    <a href="{% url 'webuser:chatpage' i.id %}" class="btn" >View</a>  
+                    <!-- {% if i.user_id.id == User %} -->
+                    <!-- {% else %} -->
+                        <!-- <a href="{% url 'webuser:join_chatroom' i.id %}">Join</a> -->
+                    <!-- {% endif %} -->
                 </td>
             </tr>
         {% endfor %}
