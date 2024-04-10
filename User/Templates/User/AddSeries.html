@@ -7,79 +7,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Series</title>
+    <link rel="stylesheet" href="{% static 'User/assets/css/main.min.css' %}">
 </head>
 <body>
 {% block content %}
-  
-<form action="" method="post" enctype="multipart/form-data">
-    <caption align="top"><h2 align="center">Add Multiple Contents</h2></caption>
-        {% csrf_token %}
-        <table align="center">
-            <tr>
-                <td>Content Title</td>
-                <td>
-                    <select name="sel_title" id="">
-                        <option value="">---Select---</option>
-                        {% for i in Details %}
-                        <option value="{{ i.id }}">{{ i.details_title }}</option>
-                        {% endfor %}
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Season</td>
-                <td>
-                    <input type="number" name="num_season" id="" placeholder="">
-                </td>
-            </tr>
-            <tr>
-                <td>Episode</td>
-                <td>
-                    <input type="number" name="num_episode" id="">
-                </td>
-            </tr>
-            <tr>
-                <td>Episode Title</td>
-                <td>
-                    <input type="text" name="txt_episode_title" id="">
-                </td>
-            </tr>
-            <tr>
-                <td>Episode Description</td>
-                <td>
-                    <textarea name="txt_episode_description" id="" cols="30" rows="10"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>Content File</td>
-                <td>
-                    <input type="file" name="file_series" id="">
-                </td>
-            </tr>
-            <tr>
-                <td>Release Date</td>
-                <td>
-                    <input type="date" name="date_release_date" id="">
-                </td>
-            </tr>
-            <tr>
-                <td>Episode Duration</td>
-                <td><input type="text" name="txt_duration" id="" placeholder="00:00:00"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="Upload" name="btn_submit">
-                    <input type="reset" value="Cancel" name="btn_cancel">
-                </td>
-            </tr>
-        </table>
+<div class="container mt-5">
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Add Multiple Contents</h2>
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+                <div class="form-group row mb-3">
+                    <label for="sel_title" class="col-sm-4 col-form-label">Content Title</label>
+                    <div class="col-sm-8">
+                        <select name="sel_title" id="sel_title" class="form-control">
+                            <option value="">---Select---</option>
+                            {% for i in Details %}
+                            <option value="{{ i.id }}">{{ i.details_title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="num_season" class="col-sm-4 col-form-label">Season</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="num_season" id="num_season" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="num_episode" class="col-sm-4 col-form-label">Episode</label>
+                    <div class="col-sm-8">
+                        <input type="number" name="num_episode" id="num_episode" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="txt_episode_title" class="col-sm-4 col-form-label">Episode Title</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="txt_episode_title" id="txt_episode_title" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="txt_episode_description" class="col-sm-4 col-form-label">Episode Description</label>
+                    <div class="col-sm-8">
+                        <textarea name="txt_episode_description" id="txt_episode_description" class="form-control" cols="30" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="file_series" class="col-sm-4 col-form-label">Content File</label>
+                    <div class="col-sm-8">
+                        <input type="file" name="file_series" id="file_series" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="date_release_date" class="col-sm-4 col-form-label">Release Date</label>
+                    <div class="col-sm-8">
+                        <input type="date" name="date_release_date" id="date_release_date" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="txt_duration" class="col-sm-4 col-form-label">Episode Duration</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="txt_duration" id="txt_duration" class="form-control" placeholder="00:00:00">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary" name="btn_submit">Upload</button>
+                <button type="reset" class="btn btn-secondary" name="btn_cancel">Cancel</button>
+            </div>
+        </div>
     </form>
+</div>
 </body>
 </html>
 
 {% if msg %}
 <script>
-    alert("{{msg}}")
-  </script>
+    alert("{{ msg }}")
+</script>
 {% endif %}
+
 {% endblock content %}

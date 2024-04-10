@@ -7,45 +7,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Content</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     {% block content %}
     
-    <form action="" method="post" enctype="multipart/form-data">
-        <caption align="top"><h2 align="center">Add Content</h2></caption>
-        {% csrf_token %}
-        <table align="center" height="150px">
-            <tr>
-                <td>Content Title</td>
-                <td>
-                    <select name="sel_title" id=""> 
+    <div class="container mt-5">
+        <form action="" method="post" enctype="multipart/form-data">
+            <h2 class="text-center mb-4">Add Content</h2>
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label for="sel_title" class="col-sm-2 col-form-label">Content Title</label>
+                <div class="col-sm-10">
+                    <select class="form-select" name="sel_title" id="sel_title"> 
                         <option value="">---Select---</option>
                         {% for i in Title %}
-                        <option value="{{ i.id }}"> {{ i.details_title }} </option>
+                            <option value="{{ i.id }}">{{ i.details_title }}</option>
                         {% endfor %}
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Upload File</td>
-                <td><input type="file" name="file_content_movie" id=""></td>
-            </tr>
-            <tr>
-                <td>Duration</td>
-                <td><input type="text" name="time_duration" id="" placeholder="00:00:00"></td>
-            </tr>
-            <tr>
-                <td>Release Date</td>
-                <td><input type="date" name="date_release" id=""></td>
-            </tr>
-            <tr align="center">
-                <td colspan="2">
-                    <input type="submit" name="btn_submit" value="Upload" />
-                    <input type="reset" name="btn_cancel" value="Cancel" />
-                </td>
-            </tr>   
-        </table>
-    </form>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="file_content_movie" class="col-sm-2 col-form-label">Upload File</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" name="file_content_movie" id="file_content_movie">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="time_duration" class="col-sm-2 col-form-label">Duration</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="time_duration" id="time_duration" placeholder="00:00:00">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="date_release" class="col-sm-2 col-form-label">Release Date</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" name="date_release" id="date_release">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-10 offset-sm-2">
+                    <input type="submit" class="btn btn-primary" name="btn_submit" value="Upload">
+                    <input type="reset" class="btn btn-secondary" name="btn_cancel" value="Cancel">
+                </div>
+            </div>   
+        </form>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/js/bootstrap.min.js"></script>
+    {% endblock content %}
 </body>
 </html>
-{% endblock content %}

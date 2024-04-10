@@ -7,47 +7,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
 {% block content %}
   
-<form action="" method="post">
-    <table align="center" width="600px">
-        <tr>
-            <td colspan="2" align="center">
-                    <img src="{{ User.user_photo.url }}" alt="Profile">
-                </td>
-            </tr>
-            <tr>
-                <td>Name </td>
-                <td><b>{{ User.user_name }}</b></td>
-            </tr>
-            <tr>
-                <td>Contact </td>
-                <td>{{ User.user_contact }}</td>
-            </tr>
-            <tr>
-                <td>Email </td>
-                <td>{{ User.user_email }}</td>
-            </tr>
-            <tr>
-                <td>Gender </td>
-                <td>{{ User.user_gender }}</td>
-            </tr>
-            <tr>
-                <td>Date Of Birth </td>
-                <td>{{ User.user_dob }}</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <a href="{% url 'webuser:edit_profile' %}">Edit Profile</a>
-                    <a href="{% url 'webuser:change_password' %}">Change Password</a>
-                </td>
-            </tr>
-        </table>
+<div class="container">
+    <form action="" method="post">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center mb-4">
+                    <img src="{{ User.user_photo.url }}" alt="Profile" class="img-fluid">
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><b>Name</b></td>
+                            <td>{{ User.user_name }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Contact</b></td>
+                            <td>{{ User.user_contact }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Email</b></td>
+                            <td>{{ User.user_email }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Gender</b></td>
+                            <td>{{ User.user_gender }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Date Of Birth</b></td>
+                            <td>{{ User.user_dob }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <a href="{% url 'webuser:edit_profile' %}" class="btn btn-primary mr-2">Edit Profile</a>
+                                <a href="{% url 'webuser:change_password' %}" class="btn btn-secondary">Change Password</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </form>
+</div>
+
+<!-- Bootstrap JS, jQuery, and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock content %}
 </body>
 </html>
-        
-{% endblock content %}

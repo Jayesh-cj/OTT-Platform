@@ -7,24 +7,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Genre</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 {% block content %}
-  
-<form action="" method="post">
-    <table align="center">
-            <tr>
-                <td>Genre</td>
-                <td><input type="text" name="txt_genre" id="" placeholder="Enter Genre"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="Add" name="btn_submit">
-                    <input type="reset" value="Cancel" name="btn_cancel">
-                </td>
-            </tr>
-        </table>
+<div class="container mt-5">
+    <form action="" method="post">
+        {% csrf_token %}
+        <h2 class="text-center mb-4">Add Genre</h2>
+        <div class="row mb-3">
+            <label for="txt_genre" class="col-sm-2 col-form-label">Genre</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txt_genre" id="txt_genre" placeholder="Enter Genre">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-10 offset-sm-2">
+                <input type="submit" class="btn btn-primary" value="Add" name="btn_submit">
+                <input type="reset" class="btn btn-secondary" value="Cancel" name="btn_cancel">
+            </div>
+        </div>
     </form>
+</div>
 {% endblock content %}
 </body>
 </html>

@@ -1,48 +1,55 @@
 {% extends "Admin/Header.html" %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Language</title>
+    <title>Language Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 {% block content %}
-  
-<form action="" method="post">
-    <table border="1" align="center" cellpadding="10">
+<div class="container">
+    <div class="form-container">
+        <form action="" method="post" class="form">
             {% csrf_token %}
-            <tr>
-                <td>Language</td>
-                <td><input type="text" name="txt_language" id="" value="{{ l_data.language_name }}"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="Submit" name="btn_submit">
-                    <input type="reset" value="Cancel" name="btn_cancel">
-                </td>
-            </tr>
+            <div class="form-group">
+                <label for="txt_language" class="form-label">Language</label>
+                <input type="text" name="txt_language" id="txt_language" class="form-control" value="{{ l_data.language_name }}">
+            </div>
+            <div class="button-group">
+                <input type="submit" value="Submit" name="btn_submit" class="btn btn-primary">
+                <input type="reset" value="Cancel" name="btn_cancel" class="btn btn-secondary">
+            </div>
+        </form>
+    </div>
+    <div class="table-container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr align="center">
+                    <th>Sl.no</th>
+                    <th>Language</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in Data %}
+                <tr align="center">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.language_name }}</td>
+                    <td><a href="{% url 'webadmin:edit_language' i.id %}" class="btn btn-info">Edit</a></td>
+                    <td><a href="{% url 'webadmin:del_language' i.id %}" class="btn btn-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
-    </form>
-    <br><br>
-    <table align="center" border="1" width="100%" cellpadding="10">
-        <tr align="center">
-            <th>Sl.no</th>
-            <th>Language</th>
-            <th colspan="2" align="center">Action</th>
-        </tr>
-        {% for i in Data %}
-        <tr align="center">
-            <td>{{ forloop.counter }}</td>
-            <td>{{ i.language_name }}</td>
-            <td><a href="{% url 'webadmin:edit_language' i.id %}">Edit</a></td>
-            <td><a href="{% url 'webadmin:del_language' i.id %}">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
+    </div>
+</div>
+{% endblock content %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-{% endblock content %}
