@@ -25,10 +25,10 @@ def check_age(uid):
     today = date.today()
     # Calculate the age
     age = today.year - user_dob.year - ((today.month, today.day) < (user_dob.month, user_dob.day))
-    # if age < 18:
-    #     return False
-    # else:
-    #     return True
+    if age < 18:
+        return True
+    else:
+        return False
     return age
 
 
@@ -42,10 +42,14 @@ def header(request):
 # Homepage
 def homepage(request):
     if 'uid' in request.session:
-        first = tbl_content_details.objects.first()
-        content_details = tbl_content_details.objects.all()
-        new_arrivals = tbl_content_details.objects.order_by('-id')
         user=tbl_user.objects.get(id=request.session["uid"])
+        Watchlist = tbl_watchlist.objects.filter(user_id = user)
+        first = tbl_content_details.objects.filter(details_status=1).first()
+        content_details = tbl_content_details.objects.filter(details_status=1).all()[:5]
+        new_arrivals = tbl_content_details.objects.filter(details_status=1).order_by("-id")
+        shows = tbl_content_details.objects.filter(details_filesize = 1, details_status=1)
+        movies = tbl_content_details.objects.filter(details_filesize = 0, details_status=1)
+        user_content = tbl_content_details.objects.filter(user_id__isnull=False, details_status=1)
         # subscribed = check_subscription(user)
         # mager = check_age(user)
 
@@ -55,10 +59,16 @@ def homepage(request):
             'New':new_arrivals,
             'First':first,
             # 'Mager':mager,
-            'User':user
+            'User':user,
+            'Watchlist':Watchlist,
+            'Shows':shows,
+            'Movies':movies,
+            'User_content':user_content
         })
     else:
         return redirect('webguest:landig_page')
+
+
 
 # My Profile 
 def show_profie(request):
@@ -79,15 +89,16 @@ def edit_profile(request):
         return redirect('webuser:show_profile')
     else:
         return render(request,'User/EditProfile.html',{
-            'Details':User
+            'Details':User,
+            'User':User
         })
 
 
 # Change Password 
 def change_password(request):
+    user = tbl_user.objects.get(id=request.session["uid"])
     if request.method == 'POST':
-        user = tbl_user.objects.get(id=request.session["uid"])
-        
+
         current = request.POST.get("txt_current_password")
         new = request.POST.get("txt_new_password")
         confirm = request.POST.get("txt_confirm_password")
@@ -106,12 +117,15 @@ def change_password(request):
             return render(request,'User/ChangePassword.html',{
                 'msg':msg
             })
-        
-    return render(request,'User/ChangePassword.html')
+    else:
+        return render(request,'User/ChangePassword.html',{
+            'User':user
+        })
 
 
 # View Package Deatails
 def view_package_deatails(request):
+    user = tbl_user.objects.get(id=request.session['uid'])
     pacakge_details=tbl_package.objects.all()
     if request.method == 'POST':
         pid = request.POST.get('package_id')
@@ -122,7 +136,8 @@ def view_package_deatails(request):
         })
     else:
         return render(request,'User/ViewPackages.html',{
-            'Package':pacakge_details
+            'Package':pacakge_details,
+            'User':user
         })
 
 
@@ -130,6 +145,14 @@ def view_package_deatails(request):
 def payment(request):
     return render(request,'User/Payment.html')
 
+# Upcomming 
+def upcomming(request):
+    current_date = date.today()
+    # print(current_date)
+    future_items = tbl_content.objects.filter(content_release_date__gt=current_date)
+    return render(request,'User/Upcomming.html',{
+        'Details':future_items
+    })
 
 # Subscribe Package
 def subscribe_package(request,pid):
@@ -139,16 +162,18 @@ def subscribe_package(request,pid):
     subscription, status = tbl_subscription.objects.get_or_create(
         user_id=user,
         package_id=pack,
-        subscription_date=date.today(),
+        # subscription_date=date.today(),
         # subscription_status=1
     )
     # print(subscription)
     # print(status)
     if status:
         subscription.subscription_status=1
+        subscription.subscription_date=date.today()
         subscription.save()
     else:
         subscription.subscription_status=1
+        subscription.subscription_date=date.today()
         subscription.save()
 
     return redirect('webuser:homepage')
@@ -195,18 +220,20 @@ def add_content_details(request):
             details_filesize = request.POST.get("sel_file_type"),
             user_id = user
         )
-        return redirect('webadmin:homepage')
+        return redirect('webuser:add_content_trailer')
 
     return render(request,'User/AddContentDetails.html',{
         'Category':category_data,
         'Language':language_data,
-        'Genre':genre
+        'Genre':genre,
+        'User':user
     })
 
 
 # Upload Users Contents 
 def add_content(request):
-    content_title = tbl_content_details.objects.order_by('-id')
+    user = tbl_user.objects.get(id=request.session['uid'])
+    content_title = tbl_content_details.objects.filter(user_id=user).order_by('-id')
     if request.method == 'POST':
         details=tbl_content_details.objects.get(id=request.POST.get("sel_title"))
         tbl_content.objects.create(
@@ -218,7 +245,8 @@ def add_content(request):
         return redirect('webuser:homepage')
     else:
         return render(request,'User/AddContent.html',{
-            'Title':content_title
+            'Title':content_title,
+            'User':user
         })
     
 
@@ -256,7 +284,8 @@ def add_crew_details(request):
 
 # Upload Trailer 
 def add_trailer(request):
-    content_data = tbl_content_details.objects.order_by("-id")
+    user = tbl_user.objects.get(id=request.session['uid'])
+    content_data = tbl_content_details.objects.filter(user_id=user).order_by("-id")
     if request.method == 'POST':
 
         content = tbl_content_details.objects.get(id=request.POST.get("sel_content"))
@@ -268,20 +297,22 @@ def add_trailer(request):
             trailer_url=request.POST.get("txt_url"),
             details_id=content
         )
-        return redirect('webuser:homepage')
+        return redirect('webuser:add_user_content')
         
     return render(request,'User/AddContentTrailer.html',{
-        'Content':content_data
+        'Content':content_data,
+        'User':user
     })
     
 
 # Check Uploaded Contents Status 
 def check_content_ststus(request):
-    user = request.session['uid']
+    user = tbl_user.objects.get(id=request.session['uid'])
     # print(user)
     details = tbl_content_details.objects.filter(user_id = user)
     return render(request,'User/UserContentStatus.html',{
-        'Details':details
+        'Details':details,
+        'User':user
     })
 
 
@@ -295,6 +326,14 @@ def content_details(request,cid):
     content_details = tbl_content_details.objects.get(id=cid)
     watchlist = tbl_watchlist.objects.filter(user_id=user)
 
+    age = check_age(user.id)
+
+    if content_details.details_certificate == 'A' and age:
+        msg = True
+    else:
+        msg = False
+
+    # print(msg   )
     if content_details.details_filesize == 0:
         # print(watchlist)
 
@@ -310,6 +349,7 @@ def content_details(request,cid):
             'Crew':crew_details,
             'Watchlist':watchlist,
             # 'user_age':user_age
+            'msg':msg
         })
     else:
         single = False
@@ -635,15 +675,17 @@ def clearchat(request):
 
 # All Contents Display 
 def all_contents_display(request):
-    details = tbl_content_details.objects.all()
+    user = tbl_user.objects.get(id=request.session['uid'])
+    details = tbl_content_details.objects.filter(details_status=1).all()
     return render(request,'User/AllContents.html',{
-        'Details':details
+        'Details':details,
+        'User':user
     })
 
 
 def AjaxSearch(request):
     word=request.GET.get("word")
-    data=tbl_content_details.objects.filter(details_title__istartswith=word)
+    data=tbl_content_details.objects.filter(details_title__istartswith=word,details_status=1)
     return render(request,"User/Ajaxsearch.html",{'data':data})
 
 

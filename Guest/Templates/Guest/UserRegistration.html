@@ -172,22 +172,23 @@ button{
         <div class="shape"></div>
     </div>
     <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <h4>New Here?</h4>
         <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
         
         <label for="profile" class="file-upload">
             <i class="fas fa-upload"></i> Choose Profile Picture
-            <input type="file" id="profile" name="profile" accept="image/*">
+            <input type="file" id="profile" name="file_photo" accept="image/*">
         </label>
 
         <label for="username">Name</label>
-        <input type="text" placeholder="Name" id="username">        
+        <input type="text" placeholder="Name" name="txt_name" id="username">        
         
         <label for="useremail">Email</label>
-        <input type="email" placeholder="Email" id="username">
+        <input type="email" placeholder="Email" name="txt_email" id="username">
 
         <label for="usercontact">Contact</label>
-        <input type="number" placeholder="Contact" id="username">
+        <input type="number" placeholder="Contact" name="num_contact" id="username">
 
         <label for="gender">Gender</label>
         <select id="gender" name="gender">
@@ -198,13 +199,13 @@ button{
         </select>
         
         <label for="dob">Date of Birth</label>
-        <input type="date" id="dob" name="dob">
+        <input type="date" id="dob" name="date_dob">
         
         <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
+        <input type="password" placeholder="Password" name="txt_password" id="password">
 
         <label for="confirm_password">Confirm Password</label>
-        <input type="password" placeholder="Confirm Password" id="confirm_password">
+        <input type="password" placeholder="Confirm Password" name="txt_con_password" id="confirm_password">
 
         <button>Create</button>
         <!-- <div class="social">

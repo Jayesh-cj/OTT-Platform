@@ -119,25 +119,25 @@ body{
         }
     </style>
 </head>
-<body>
+<body> 
 
     <div class="main-content-container" style="background-image: url('{{ Details.details_photo.url }}');">
             
-        <div class="sub-container">
+        <div class="sub-container"> 
             <div class="content-details">
                 <h1 class="title">
                     {{ Details.details_title }}
                 </h1>
                 <div class="buttons">
-                    <a href="#" class="btn-play">Play</a>
-                    <a href="#" class="btn-play">Trailer</a>
+                    <a href="{% url 'webuser:play_content' Content.id %}" class="btn-play">Play</a>
+                    <a href="{% url 'webuser:view_trailer' Details.id %}" class="btn-play">Trailer</a>
                     <div class="c-dropdown">
                         <label for="c-dropdown-menu" id="c-dropdown-label" class="btn-play">Watch Latter</label>
                         <div class="c-dropdown-menu" id="c-dropdown-menu">
                             {% for i in Watchlist %}
-                                <a href="#">{{ i.watchlist_name}} </a>
+                                <a href="{% url 'webuser:add_content_in_watchlist' i.id First.id %}">{{ i.watchlist_name}} </a>
                             {% endfor %}
-                            <a href="#">Create</a>
+                            <a href="{% url 'webuser:create_watchlist' %}">Create</a>
                         </div>
                     </div>
                 </div>
@@ -175,15 +175,11 @@ body{
 
 </script>
 
-<script>
-//     // Show age restriction alert when button is clicked
-//     document.getElementById("age_check_btn").addEventListener("click", function() {
-//         var age = {{ user_age }};
-//         if (age < 18) {
-//             // Display age restriction notification
-//         }
-//     });
-</script>
+{% if msg %}
+    <script>
+        alert("You are not allowed to access this content as you are under 18 years old.");
+    </script>
+{% endif %}
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {

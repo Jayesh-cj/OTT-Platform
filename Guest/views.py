@@ -13,16 +13,26 @@ def landing_page(request):
 # User Registration
 def user_registration(request):
     if request.method=='POST' and request.FILES:
-        tbl_user.objects.create(
-            user_name=request.POST.get("txt_name"),
-            user_contact=request.POST.get("num_contact"),
-            user_email=request.POST.get("txt_email"),
-            user_photo=request.FILES.get("file_photo"),
-            user_gender=request.POST.get("gender"),
-            user_dob=request.POST.get("date_dob"),
-            user_password=request.POST.get("txt_password")
-        )
-        return redirect('webuser:homepage')
+        password = request.POST.get("txt_password")
+        con_password = request.POST.get("txt_con_password")
+        print(password)
+        print(con_password)
+        if password == con_password:
+            tbl_user.objects.create(
+                user_name=request.POST.get("txt_name"),
+                user_contact=request.POST.get("num_contact"),
+                user_email=request.POST.get("txt_email"),
+                user_photo=request.FILES.get("file_photo"),
+                user_gender=request.POST.get("gender"),
+                user_dob=request.POST.get("date_dob"),
+                user_password=request.POST.get("txt_password")
+            )
+            return redirect('webguest:landig_page')
+        else:
+            msg = "Password Missmatch!"
+            return render(request,'Guest/UserRegistration.html',{
+                'msg':msg
+            })
     else:
         return render(request,'Guest/UserRegistration.html')
 

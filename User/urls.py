@@ -59,6 +59,9 @@ urlpatterns = [
     path('clearchat/',views.clearchat,name="clearchat"),
 
 
+    path('Upcomming/',views.upcomming,name="upcomming"),
+
+
     path('All Contents/',views.all_contents_display, name="display_all_contents"),
     path('AjaxSearch/', views.AjaxSearch, name="ajax_search"),
     path('Logout/',views.logout, name="logout"),

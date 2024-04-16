@@ -53,5 +53,6 @@ urlpatterns = [
 
     path('UsersList/',views.users_list,name="users_list"),
     path('BanUser/<int:uid>',views.user_ban,name="user_ban"),
+    path('Feedbacks/',views.view_feedbacks,name="feedbacks"),
 
 ]

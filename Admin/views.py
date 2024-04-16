@@ -395,7 +395,7 @@ def add_trailer(request):
 # Content Management
 # Content Display
 def content_display(request):
-    content_details = tbl_content_details.objects.order_by("-id")
+    content_details = tbl_content_details.objects.filter(details_status = 1).order_by("-id")
     
     return render(request,'Admin/ContentManagement.html',{
         'Details':content_details
@@ -404,7 +404,7 @@ def content_display(request):
 
 # User Content Management 
 def user_content_management(request):
-    content_details = tbl_content_details.objects.exclude(user_id__isnull=True)
+    content_details = tbl_content_details.objects.exclude(user_id__isnull=True).filter(details_status=0)
     return render(request,'Admin/UsersContentManagement.html',{
         'Details':content_details
     })
@@ -512,3 +512,10 @@ def users_list(request):
 def user_ban(request,uid):
     tbl_user.objects.get(id=uid).delete()
     return redirect('webadmin:users_list')
+
+# Show Feedbacks 
+def view_feedbacks(request):
+    feedbacks = tbl_feedback.objects.all().order_by('-id')
+    return render(request,'Admin/Feedbacks.html',{
+        'feedbacks':feedbacks
+    })

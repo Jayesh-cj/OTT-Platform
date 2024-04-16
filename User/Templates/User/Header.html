@@ -45,9 +45,9 @@
 
 					<!-- App brand starts -->
 					<div class="app-brand px-3 py-3 d-flex align-items-center">
-						<a href="index.html">
-							<img src="{% static 'User/assets/images/logo.svg' %} " class="logo" alt="Bootstrap Gallery" />
-						</a>
+						
+						<h3 style="color: antiquewhite;">CINEMATE</h3>	
+						
 					</div>
 					<!-- App brand ends -->
 
@@ -83,7 +83,7 @@
 							<li class="active current-page">
 								<a href="{% url 'webuser:homepage' %}">
 									<i class="fs-3 bi bi-house-door"></i>
-									<span class="menu-text">Dashboard</span>
+									<span class="menu-text">Home</span>
 								</a>
 							</li>
 							<li>
@@ -92,10 +92,24 @@
 									<span class="menu-text">Subscription</span>
 								</a>
 							</li>
-							<li>
-								<a href="{% url 'webuser:add_users_contents_details' %}">
+							<li class="treeview">
+								<a href="#!">
 									<i class="fs-3 bi bi-camera-reels"></i>
-									<span class="menu-text">Upload Content</span>
+									<span class="menu-text">Content Management</span>
+								</a>
+								<ul class="treeview-menu">
+									<li>
+										<a href="{% url 'webuser:add_users_contents_details' %}">Upload</a>
+									</li>
+									<li>
+										<a href="{% url 'webuser:check_content_status' %}">Track Content Status</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="{% url 'webuser:upcomming' %}">
+									<i class="fs-3 bi bi-card-list"></i>
+									<span class="menu-text">Upcoming</span>
 								</a>
 							</li>
 							<li>
@@ -180,8 +194,6 @@
 								<div class="dropdown-menu dropdown-menu-end shadow">
 									<a class="dropdown-item d-flex align-items-center" href="{% url 'webuser:show_profile' %}"><i
 											class="bi bi-person fs-4 me-2"></i>Profile</a>
-									<a class="dropdown-item d-flex align-items-center" href="settings.html"><i
-											class="bi bi-gear fs-4 me-2"></i>Account Settings</a>
 									<a class="dropdown-item d-flex align-items-center" href="{% url 'webuser:logout' %}"><i
 											class="bi bi-escape fs-4 me-2"></i>Logout</a>
 								</div>

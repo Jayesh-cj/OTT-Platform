@@ -197,15 +197,15 @@
                 {{ First.details_title }}
             </h1>
             <div class="buttons">
-                <a href="#" class="btn-play">Play</a>
-                <a href="#" class="btn-play">Trailer</a>
+                <a href="{% url 'webuser:content_details' First.id %}" class="btn-play">Play</a>
+                <a href="{% url 'webuser:view_trailer' First.id %}" class="btn-play">Trailer</a>
                 <div class="c-dropdown">
                     <label for="c-dropdown-menu" id="c-dropdown-label" class="btn-play">Watch Latter</label>
                     <div class="c-dropdown-menu" id="c-dropdown-menu">
                         {% for i in Watchlist %}
-                            <a href="#">{{ i.watchlist_name}} </a>
+                            <a href="{% url 'webuser:add_content_in_watchlist' i.id First.id %}">{{ i.watchlist_name}} </a>
                         {% endfor %}
-                        <a href="#">Create</a>
+                        <a href="{% url 'webuser:create_watchlist' %}">Create</a>
                     </div>
                 </div>
             </div>
@@ -227,6 +227,51 @@
         <label><h1>New Arrivals</h1></label>
         <div class="image-container">
             {% for item in Details %}
+                <div class="image-item">
+                    <a href="{% url 'webuser:content_details' item.id %}">
+                        <img src="{{ item.details_photo.url }}" alt="">
+                        <div class="image-text">{{ item.details_title }}</div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+    <section>
+        <label><h1>TV Shows</h1></label>
+        <div class="image-container">
+            {% for item in Shows %}
+                <div class="image-item">
+                    <a href="{% url 'webuser:content_details' item.id %}">
+                        <img src="{{ item.details_photo.url }}" alt="">
+                        <div class="image-text">{{ item.details_title }}</div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+    <section>
+        <label><h1>Movies</h1></label>
+        <div class="image-container">
+            {% for item in Movies %}
+                <div class="image-item">
+                    <a href="{% url 'webuser:content_details' item.id %}">
+                        <img src="{{ item.details_photo.url }}" alt="">
+                        <div class="image-text">{{ item.details_title }}</div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+    <section>
+        <label><h1>User Contents</h1></label>
+        <div class="image-container">
+            {% for item in User_content %}
                 <div class="image-item">
                     <a href="{% url 'webuser:content_details' item.id %}">
                         <img src="{{ item.details_photo.url }}" alt="">

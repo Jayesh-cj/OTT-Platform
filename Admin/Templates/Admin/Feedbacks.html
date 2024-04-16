@@ -1,0 +1,54 @@
+{% extends "Admin/Header.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedbacks</title>
+    {% block content %}
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Your custom styles */
+        /* Add any custom styles here */
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Feedbacks</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="row">SL.NO</th>
+                            <th scope="row">User</th>
+                            <th scope="row">Content</th>
+                            <th scope="row">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for feedback in feedbacks %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ feedback.user_id.user_name }}</td>
+                            <td>{{ feedback.feedback_content }}</td>
+                            <td>{{ feedback.feedback_date }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3">No feedbacks found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS (optional, but may be needed for some features) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% endblock content %}
+</body>
+</html>

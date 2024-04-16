@@ -1,6 +1,4 @@
 {% extends "Admin/Header.html" %}
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,88 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Content Management</title>
     {% block content %}
-      
-    <!-- <style>
-        
-        /* Style the dropdown container */
-        .dropdown {
-          position: relative;
-          display: inline-block;
-        }
-        
-        /* Style the dropdown button */
-        .dropdown button {
-            background-color: #3498db;
-          color: #fff;
-          padding: 10px;
-          font-size: 16px;
-          border: none;
-          cursor: pointer;
-        }
-        
-        /* Style the dropdown content (hidden by default) */
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #f9f9f9;
-          min-width: 160px;
-          box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
-    
-        /* Style the links inside the dropdown */
-        .dropdown-content a {
-          color: #333;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-        }
-        
-        /* Change color on hover */
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-        
-        /* Show the dropdown content when the button is hovered over */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        .dashboard {
-            width: 200px;
-            height: 1000px;
-        }
-
-        .btn {
-            width: 75px;
-            height: 25px;
-            background-color: rgb(80, 80, 241);
-        }
-    </style> -->
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        a{
+        /* Your custom styles */
+        a {
             text-decoration: none;        
         }
-        .nav-links{
+        .nav-links {
             justify-content: space-evenly;
             display: flex;
             height: 50px;
             background-color: aliceblue;
         }
-        .nav-links-child{
+        .nav-links-child {
             padding: 12px;
             width: 100%;
         }
-        .nav-links-child:hover{
+        .nav-links-child:hover {
             transform: scale(1.2);
             color: black;
         }
+        .content-photo {
+            max-width: 600px;
+            height: auto;
+        }
     </style>
 </head>
-
-
 <body>
-    
     <div class="nav-links">
         <a href="{% url 'webadmin:content_display' %}">
             <div class="nav-links-child">Content List</div>
@@ -98,43 +42,44 @@
             <div class="nav-links-child">User Content List</div>
         </a>
     </div>
-    
+
     <form action="" method="post">
         {% csrf_token %}
-        <table align="center" border="1" width="100%" height="500px">
-            {% for i in Details %}
-            <tr>
+        <div class="container mt-4">
+            <table class="table">
+                {% for i in Details %}
+                <tr>
                     <td colspan="2" align="center">
                         <h1>{{ i.details_title }}</h1>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <img src="{{ i.details_photo.url }}" width="600px" alt="Content Poster">
+                        <img src="{{ i.details_photo.url }}" class="content-photo" alt="Content Poster">
                     </td>
                     <td>
-                        <p>  {{ i.details_description }}</p><br>
-                        Category: {{ i.category_id.category_name }} <br>
-                        Language : {{ i.language_id.language_name }} <br>
-                        Genre : {{ i.details_genres }} <br>
-                        <!-- Duration : {{ i.content_duration }} hr <br>
-                        Release Date : {{ i.content_release_date }} -->
+                        <p>{{ i.details_description }}</p>
+                        <p>Category: {{ i.category_id.category_name }}</p>
+                        <p>Language: {{ i.language_id.language_name }}</p>
+                        <p>Genre: {{ i.details_genres }}</p>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
                         {% if i.details_filesize == 0 %}
-                            <a href="{% url 'webadmin:content_play' i.id %}"><input type="button" value="Watch"></a>
-                            {% else %}
-                            <a href="{% url 'webadmin:series_details' i.id %}"><input type="button" value="List"></a>
+                            <a href="{% url 'webadmin:content_play' i.id %}" class="btn btn-success">Watch</a>
+                        {% else %}
+                            <a href="{% url 'webadmin:series_details' i.id %}" class="btn btn-success">List</a>
                         {% endif %}
-                        <a href="{% url 'webadmin:view_trailer' i.id %}"><input type="button" value="Trailer"></a>
+                        <a href="{% url 'webadmin:view_trailer' i.id %}" class="btn btn-info">Trailer</a>
                     </td>
                 </tr>
-            {% endfor %}
-        </table>
+                {% endfor %}
+            </table>
+        </div>
     </form>
+    <!-- Bootstrap JS (optional, but may be needed for some features) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-    
 {% endblock content %}

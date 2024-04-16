@@ -48,11 +48,11 @@
                 <td>
                     <h2>{{ i.community_name }}</h2>
                     <p>{{ i.community_description }}</p>
-                    {% if i.community_status == 0 %}
+                    <!-- {% if i.community_status == 0 %}
                         <small>Open</small>                  
                         {% else %}
                         <small>Closed</small>
-                    {% endif %} <br>    
+                    {% endif %} <br>     -->
                     {% if i.user_id.id == User %}
                         <a href="{% url 'webuser:chatpage' i.id %}">View</a>  
                     {% else %}

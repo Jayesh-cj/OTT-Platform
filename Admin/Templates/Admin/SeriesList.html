@@ -1,44 +1,50 @@
 {% extends "Admin/Header.html" %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Series Details</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Your custom styles */
+        /* Add any custom styles here */
+    </style>
 </head>
 <body>
     {% block content %}
-      
-    <form action="" method="post">
-        <table align="center" cellpadding="10px" width="800px">
-            {% for i in Series_Details %}
-                <tr align="center">
-                    <td colspan="2"><h3>{{ i.content_title }}</h3></td>
-                </tr>
-                <tr>
-                    <td rowspan="2"><img src="{{ i.details_id.details_photo.url}}" alt="Content Poster" style="width: 500px;"></td>
-                </tr>
-                <tr>
-                    <td>
-                        {{ i.content_description }} <br><br>
-                        Category :  {{ i.details_id.category_id.category_name }} <br>
-                        Language :{{ i.details_id.language_id.language_name }} <br>
-                        Genre : {{ i.details_id.details_genres }} <br>
-                        Duration : {{ i.content_duration }} hr <br>
-                        Release Date : {{ i.content_release_date }}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <a href="{% url 'webadmin:series_play' i.id %}"><input type="button" value="Watch"></a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-    </form>
+    <div class="container mt-4">
+        <form action="" method="post">
+            <table class="table table-bordered">
+                {% for i in Series_Details %}
+                    <tr align="center">
+                        <td colspan="2"><h3>{{ i.content_title }}</h3></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><img src="{{ i.details_id.details_photo.url }}" alt="Content Poster" class="img-fluid"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>{{ i.content_description }}</p>
+                            <p>Category: {{ i.details_id.category_id.category_name }}</p>
+                            <p>Language: {{ i.details_id.language_id.language_name }}</p>
+                            <p>Genre: {{ i.details_id.details_genres }}</p>
+                            <p>Duration: {{ i.content_duration }} hr</p>
+                            <p>Release Date: {{ i.content_release_date }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <a href="{% url 'webadmin:series_play' i.id %}" class="btn btn-primary">Watch</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </div>
+    <!-- Bootstrap JS (optional, but may be needed for some features) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% endblock content %}
 </body>
 </html>
-    
-
-{% endblock content %}
