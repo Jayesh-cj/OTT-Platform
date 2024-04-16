@@ -78,7 +78,7 @@
 					<!-- Sidebar profile ends -->
 
 					<!-- Sidebar menu starts -->
-					<div class="sidebarMenuScroll">
+					<div class="sidebarMenuScroll" style="height: 500px; overflow-x: auto;">
 						<ul class="sidebar-menu">
 							<li class="active current-page">
 								<a href="{% url 'webuser:homepage' %}">
@@ -160,7 +160,7 @@
 
 								<!-- Search container start -->
 								<form action="" method="post" id="SearchForm"  onkeyup="getMovie()">
-									<div class="input-group">
+									<div class="input-group" onclick="redirect()">
 										<input type="text" id="search" class="form-control" placeholder="Search" />
 										<button class="btn btn-outline-primary" type="button">
 											<i class="bi bi-search fs-5"></i>
@@ -254,16 +254,17 @@
         //         },
         //     });
         // });
-		function getMovie(){
-			var word=document.getElementById("search").value;
-			var ur="{% url 'webuser:ajax_search'  %}"
-			$.ajax({
-                url: ur,
-                data: { word: word, },
-                success: function (data) {
-                    $("#search-result").html(data);
-                },
-            });
+		function redirect(){
+			// var word=document.getElementById("search").value;
+			// var ur="{% url 'webuser:ajax_search'  %}"
+			// $.ajax({
+            //     url: ur,
+            //     data: { word: word, },
+            //     success: function (data) {
+            //         $("#search-result").html(data);
+            //     },
+            // });
+			window.location.href="{% url 'webuser:display_all_contents' %}"
 		}
 	</script>
 

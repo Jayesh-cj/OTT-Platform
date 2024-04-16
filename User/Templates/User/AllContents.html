@@ -1,47 +1,300 @@
-{% extends "User/Header.html" %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contents</title>
 
-{% block content %}
-  <style>
-    img {
-      width: 300px; /* Set a fixed width to the images */
-      /* Adjust the value as per your requirements */
-    }
-    a{
-        text-decoration: none;
-    }
-  </style>
-</head>
-<body>
-    <form action="" method="post">
-        <div id="search-result">
-        <table>
-            {% for i in Details %}
-                <tr>
-                    <td>
-                        <a href="{% url 'webuser:content_details' i.id %}">
-                            <img src="{{ i.details_photo.url }}" alt="Not Found">
-                        </a>
-                    </td>
-                    <td>&nbsp;
-                        <a href="{% url 'webuser:content_details' i.id %}">
-                            <h1>{{ i.details_title }}</h1>
-                            <p>{{ i.details_description }}</p>
-                        </a>
-                    </td>
-                </tr>
-            </a>
-            {% endfor %}
-        </table>
-    </div>
-    </form>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Bootstrap Gallery - Mercury Admin Template</title>
+
+		<!-- Meta -->
+		<meta name="description" content="Marketplace for Bootstrap Admin Dashboards" />
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="canonical" href="https://www.bootstrap.gallery/">
+		<meta property="og:url" content="https://www.bootstrap.gallery">
+		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+		<meta property="og:type" content="Website">
+		<meta property="og:site_name" content="Bootstrap Gallery">
+		<link rel="shortcut icon" href="{% static 'assets/images/favicon.svg' %} " />
+
+		<!-- *************
+			************ CSS Files *************
+		************* -->
+		<link rel="stylesheet" href="{% static 'User/assets/fonts/bootstrap/bootstrap-icons.css' %} " />
+		<link rel="stylesheet" href="{% static 'User/assets/css/main.min.css' %} " />
+
+		<!-- *************
+			************ Vendor Css Files *************
+		************ -->
+
+		<!-- Scrollbar CSS -->
+		<link rel="stylesheet" href="{% static 'User/assets/vendor/overlay-scroll/OverlayScrollbars.min.css' %} " />
+	</head>
+
+	<>
+		<!-- Page wrapper start -->
+		<div class="page-wrapper pinned">
+
+			<!-- Main container start -->
+			<div class="main-container">
+
+				<!-- Sidebar wrapper start -->
+				<nav id="sidebar" class="sidebar-wrapper">
+
+					<!-- App brand starts -->
+					<div class="app-brand px-3 py-3 d-flex align-items-center">
+						<a href="index.html">
+							<img src="{% static 'User/assets/images/logo.svg' %} " class="logo" alt="Bootstrap Gallery" />
+						</a>
+					</div>
+					<!-- App brand ends -->
+
+					<!-- Sidebar profile starts -->
+					<div class="sidebar-user-profile">
+						<img src="{{User.user_photo.url}} " class="profile-thumb rounded-circle p-2 d-lg-flex d-none"
+							alt="Bootstrap Gallery" />
+						<h5 class="profile-name lh-lg mt-2 text-truncate">{{ User.user_name }}</h5>
+						<!-- <ul class="profile-actions d-flex m-0 p-0">
+							<li>
+								<a href="javascript:void(0)">
+									<i class="bi bi-skype fs-4"></i>
+									<span class="count-label"></span>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0)">
+									<i class="bi bi-dribbble fs-4"></i>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0)">
+									<i class="bi bi-twitter fs-4"></i>
+								</a>
+							</li>
+						</ul> -->
+					</div>
+					<!-- Sidebar profile ends -->
+
+					<!-- Sidebar menu starts -->
+					<div class="sidebarMenuScroll" style="height: 500px; overflow-x: auto;">
+						<ul class="sidebar-menu">
+							<li class="active current-page">
+								<a href="{% url 'webuser:homepage' %}">
+									<i class="fs-3 bi bi-house-door"></i>
+									<span class="menu-text">Dashboard</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'webuser:package_deatails' %}">
+									<i class="fs-3 bi bi-credit-card-2-back"></i>
+									<span class="menu-text">Subscription</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'webuser:add_users_contents_details' %}">
+									<i class="fs-3 bi bi-camera-reels"></i>
+									<span class="menu-text">Upload Content</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'webuser:chatrooms' %}">
+									<i class="fs-3 bi bi-chat-text"></i>
+									<span class="menu-text">Chatroom</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'webuser:create_watchlist' %}">
+									<i class="fs-3 bi bi-card-list"></i>
+									<span class="menu-text">Watchlist</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'webuser:view_complaints' %}">
+									<i class="fs-3 bi bi-exclamation-triangle"></i>
+									<span class="menu-text">Complaint</span>
+								</a>
+							</li>
+							<li>
+								<a href="{% url 'webuser:feedback' %}">
+									<i class="fs-3 bi bi-check2-circle"></i>
+									<span class="menu-text">Feedback</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- Sidebar menu ends -->
+
+				</nav>
+				<!-- Sidebar wrapper end -->
+
+				<!-- App container starts -->
+				<div class="app-container">
+
+					<!-- App header starts -->
+					<div class="app-header d-flex align-items-center">
+
+						<!-- Toggle buttons start -->
+						<div class="d-flex">
+							<button class="btn btn-outline-primary me-2 toggle-sidebar" id="toggle-sidebar">
+								<i class="bi bi-chevron-left fs-5"></i>
+							</button>
+							<button class="btn btn-outline-primary me-2 pin-sidebar" id="pin-sidebar">
+								<i class="bi bi-chevron-left fs-5"></i>
+							</button>
+						</div>
+						<!-- Toggle buttons end -->
+
+						<!-- App brand sm start -->
+						<div class="app-brand-sm d-md-none d-sm-block">
+							<a href="index.html">
+								<img src="{% static 'User/assets/images/logo-sm.svg' %} " class="logo" alt="Bootstrap Gallery">
+							</a>
+						</div>
+						<!-- App brand sm end -->
+
+						<!-- App header actions start -->
+						<div class="header-actions">
+							<div class="d-lg-block d-none me-2">
+
+								<!-- Search container start -->
+								<form action="" method="post" id="SearchForm"  onkeyup="getMovie()">
+									<div class="input-group">
+										<input type="text" id="search" class="form-control" placeholder="Search" />
+										<button class="btn btn-outline-primary" type="button">
+											<i class="bi bi-search fs-5"></i>
+										</button>
+									</div>
+								</form>
+								<!-- Search container end -->
+
+							</div>
+                            
+							<div class="dropdown ms-3">
+								<a id="userSettings" class="dropdown-toggle d-flex py-2 align-items-center text-decoration-none"
+									href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<span class="d-none d-md-block me-2">{{ User.user_name }}</span>
+									<img src="{{ User.user_photo.url }} " class="rounded-circle img-3x" alt="Bootstrap Gallery" />
+								</a>
+								<div class="dropdown-menu dropdown-menu-end shadow">
+									<a class="dropdown-item d-flex align-items-center" href="{% url 'webuser:show_profile' %}"><i
+											class="bi bi-person fs-4 me-2"></i>Profile</a>
+									<a class="dropdown-item d-flex align-items-center" href="settings.html"><i
+											class="bi bi-gear fs-4 me-2"></i>Account Settings</a>
+									<a class="dropdown-item d-flex align-items-center" href="{% url 'webuser:logout' %}"><i
+											class="bi bi-escape fs-4 me-2"></i>Logout</a>
+								</div>
+							</div>
+						</div>
+						<!-- App header actions end -->
+
+					</div>
+					<!-- App header ends -->
+				
+
+					<style>
+                        img {
+                          width: 300px; /* Set a fixed width to the images */
+                          /* Adjust the value as per your requirements */
+                        }
+                        a{
+                            text-decoration: none;
+                        }
+                    </style>
+                    <form action="" method="post">
+                        <div id="search-result">
+                        <table>
+                            {% for i in Details %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'webuser:content_details' i.id %}">
+                                            <img src="{{ i.details_photo.url }}" alt="Not Found">
+                                        </a>
+                                    </td>
+                                    <td>&nbsp;
+                                        <a href="{% url 'webuser:content_details' i.id %}">
+                                            <h1>{{ i.details_title }}</h1>
+                                            <p>{{ i.details_description }}</p>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </a>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    </form>
+  
+                    
+					<!-- App footer start -->
+					<!-- <div class="app-footer">
+						<span>© Bootstrap Gallery 2023</span>
+					</div> -->
+					<!-- App footer end -->
+
+				</div>
+				<!-- App container ends -->
+
+			</div>
+			<!-- Main container end -->
+
+		</div>
+		<!-- Page wrapper end -->
+
+		<!-- *************
+			************ JavaScript Files *************
+		************* -->
+		<!-- Required jQuery first, then Bootstrap Bundle JS -->
+		<script src="{% static 'User/assets/js/jquery.min.js' %} "></script>
+		<script src="{% static 'User/assets/js/bootstrap.bundle.min.js' %} "></script>
+
+		<!-- *************
+			************ Vendor Js Files *************
+		************* -->
+
+		<!-- Overlay Scroll JS -->
+		<script src="{% static 'User/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js' %} "></script>
+		<script src="{% static 'User/assets/vendor/overlay-scroll/custom-scrollbar.js' %} "></script>
+
+		<!-- Apex Charts -->
+		<script src="{% static 'User/assets/vendor/apex/apexcharts.min.js' %} "></script>
+		<script src="{% static 'User/assets/vendor/apex/custom/dash1/sales.js' %} "></script>
+		<script src="{% static 'User/assets/vendor/apex/custom/dash1/sparkline.js' %} "></script>
+		<script src="{% static 'User/assets/vendor/apex/custom/dash1/sparkline2.js' %} "></script>
+
+		<!-- Rating -->
+		<script src="{% static 'User/assets/vendor/rating/raty.js' %} "></script>
+		<script src="{% static 'User/assets/vendor/rating/raty-custom.js' %} "></script>
+
+		<!-- Custom JS files -->
+		<script src="{% static 'User/assets/js/custom.js' %} "></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        // $("#search").change(function () {
+        //     var search = $(this).val();
+        //     var ur = $("#SearchForm").attr("data-places-url");
+        //     $.ajax({
+        //         url: ur,
+        //         data: { disid: did, },
+        //         success: function (data) {
+        //             $("#place").html(data);
+        //         },
+        //     });
+        // });
+		function getMovie(){
+			var word=document.getElementById("search").value;
+			var ur="{% url 'webuser:ajax_search'  %}"
+			$.ajax({
+                url: ur,
+                data: { word: word, },
+                success: function (data) {
+                    $("#search-result").html(data);
+                },
+            });
+		}
+	</script>
 </body>
 </html>
     
-{% endblock content %}

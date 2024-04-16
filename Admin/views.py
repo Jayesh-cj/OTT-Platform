@@ -401,6 +401,7 @@ def content_display(request):
         'Details':content_details
     })
 
+
 # User Content Management 
 def user_content_management(request):
     content_details = tbl_content_details.objects.exclude(user_id__isnull=True)
@@ -425,17 +426,31 @@ def reject_content(request,rid):
 # Series Details List 
 def series_details_list(request,sid):
     series_details = tbl_content.objects.filter(details_id=sid)
+    # for i in series_details:
+    #     print(i.details_id.id)
     return render(request,'Admin/SeriesList.html',{
         'Series_Details':series_details
     })
 
 # Content Playing in Admin Side
 def content_play_in_admin(request,cid):
-    content = tbl_content.objects.get(id=cid)
-    contenty_details = tbl_content_details.objects.get(id=content.details_id.id)
+    # print(cid)
+    content = tbl_content.objects.get(details_id=cid)
+    content_details = tbl_content_details.objects.get(id=content.details_id.id)
+    movie = True
     return render(request,'Admin/ContentPlay.html',{
         'Content_data':content,
-        'Details':contenty_details
+        'Details':content_details
+    })
+
+# Series Play In Admin 
+def series_play_in_admin(request,cid):
+    # print(cid)
+    content = tbl_content.objects.get(id=cid)
+    content_details = tbl_content_details.objects.get(id=content.details_id.id)
+    return render(request,'Admin/ContentPlay.html',{
+        'Content_data':content,
+        'Details':content_details
     })
 
 

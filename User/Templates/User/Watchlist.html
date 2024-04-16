@@ -34,21 +34,26 @@
     <div class="row mt-4">
         <div class="col-md-8 offset-md-2">
             <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Playlist Title</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in Watchlist %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ i.watchlist_name }}</td>
-                        <td><a href="{% url 'webuser:view_watchlist_contents' i.id %}" class="btn btn-info">View Contents</a></td>
-                    </tr>
-                    {% endfor %}
+                {% if not Watchlist %}
+                  <h1 align="center">No Watchlist Created Yet</h1>
+                  {% else %}
+                  <thead>
+                      <tr>
+                          <th>#</th>
+                          <th>Playlist Title</th>
+                          <th>Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                        {% for i in Watchlist %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.watchlist_name }}</td>
+                            <td><a href="{% url 'webuser:view_watchlist_contents' i.id %}" class="btn btn-info">View Contents</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                    
                 </tbody>
             </table>
         </div>
@@ -58,6 +63,7 @@
 {% if msg %}
 <script>
     alert('{{ msg }}')
+    window.location.href="{% url 'webuser:create_watchlist' %}"
 </script>
 {% endif %}
 

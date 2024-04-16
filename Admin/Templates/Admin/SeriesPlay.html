@@ -13,7 +13,11 @@
       
     <table align="center">
         <tr>
-            <td align="center"><h1>{{ Content_data.details_id.details_title }}</h1></td>
+            {% if Details.file_size == 0 %}
+                <td align="center"><h1>{{ Content_data.details_id.details_title }}</h1></td>
+            {% else %}
+                <td align="center"><h1>{{ Content_data.details_id.details_title }} Season {{ Content_data.content_season }} Episode {{ Content_data.content_episode}}</h1></td>
+            {% endif %}
         </tr>
         <tr>
             <td align="center">

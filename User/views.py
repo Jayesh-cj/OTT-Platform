@@ -45,16 +45,17 @@ def homepage(request):
         first = tbl_content_details.objects.first()
         content_details = tbl_content_details.objects.all()
         new_arrivals = tbl_content_details.objects.order_by('-id')
-        user=request.session["uid"]
-        subscribed = check_subscription(user)
-        mager = check_age(user)
+        user=tbl_user.objects.get(id=request.session["uid"])
+        # subscribed = check_subscription(user)
+        # mager = check_age(user)
 
         return render(request,'User/Homepage.html',{
             'Details':content_details,
-            'Subscribed':subscribed,
+            # 'Subscribed':subscribed,
             'New':new_arrivals,
             'First':first,
-            'Mager':mager
+            # 'Mager':mager,
+            'User':user
         })
     else:
         return redirect('webguest:landig_page')
@@ -286,14 +287,17 @@ def check_content_ststus(request):
 
 # Display Content Details 
 def content_details(request,cid):
-    user = request.session['uid']
-    user_age = check_age(user)
+    # user = request.session['uid']
+    # user_age = check_age(user)
 
-    # user = tbl_user.objects.get(request.session['uid'])
+    user = tbl_user.objects.get(id=request.session['uid'])
+    # print(user)
     content_details = tbl_content_details.objects.get(id=cid)
-    watchlist = tbl_watchlist.objects.filter(user_id=request.session['uid'])
+    watchlist = tbl_watchlist.objects.filter(user_id=user)
 
     if content_details.details_filesize == 0:
+        # print(watchlist)
+
         single = True
 
         crew_details = tbl_crew.objects.filter(details_id=cid)
@@ -305,10 +309,11 @@ def content_details(request,cid):
             'Content':content,
             'Crew':crew_details,
             'Watchlist':watchlist,
-            'user_age':user_age
+            # 'user_age':user_age
         })
     else:
         single = False
+        print(watchlist)
 
         # content_details = tbl_content_details.objects.get(id=cid)
         series_list = tbl_content.objects.filter(details_id=cid)
@@ -325,8 +330,8 @@ def content_details(request,cid):
 
 # Create Watch List 
 def create_watchlist(request):
-    playlist = tbl_watchlist.objects.all()
     user = tbl_user.objects.get(id=request.session['uid'])
+    playlist = tbl_watchlist.objects.filter(user_id=user)
 
     if request.method == 'POST':
         tbl_watchlist.objects.create(

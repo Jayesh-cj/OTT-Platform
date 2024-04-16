@@ -87,24 +87,24 @@
         <ul class="navbar-list">
 
           <li>
-            <a href="./index.html" class="navbar-link">Home</a>
+            <a href="{% url 'webguest:user_login' %}" class="navbar-link">Home</a>
           </li>
 
           <li>
-            <a href="#" class="navbar-link">Movie</a>
+            <a href="{% url 'webguest:user_login' %}" class="navbar-link">Movie</a>
           </li>
 
           <li>
-            <a href="#" class="navbar-link">Tv Show</a>
+            <a href="{% url 'webguest:user_login' %}" class="navbar-link">Tv Show</a>
           </li>
 
           <li>
-            <a href="#" class="navbar-link">Web Series</a>
+            <a href="{% url 'webguest:user_login' %}" class="navbar-link">Web Series</a>
           </li>
 
-          <li>
-            <a href="#" class="navbar-link">Pricing</a>
-          </li>
+          <!-- <li>
+            <a href="{% url 'webguest:user_login' %}" class="navbar-link">Pricing</a>
+          </li> -->
 
         </ul>
 
@@ -178,9 +178,9 @@
               </div>
 
               <div class="ganre-wrapper">
-                <a href="#">Romance,</a>
+                <a href="{% url 'webguest:user_login' %}">Romance,</a>
 
-                <a href="#">Drama</a>
+                <a href="{% url 'webguest:user_login' %}">Drama</a>
               </div>
 
               <div class="date-time">
@@ -220,7 +220,7 @@
         - #UPCOMING
       -->
 
-      <section class="upcoming">
+      <!-- <section class="upcoming">
         <div class="container">
 
           <div class="flex-wrapper">
@@ -400,7 +400,7 @@
           </ul>
 
         </div>
-      </section>
+      </section> -->
 
 
 

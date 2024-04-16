@@ -20,6 +20,49 @@
     </style>
 </head>
 <body>
+    <style>
+        .nav-links {
+            justify-content: space-evenly;
+            display: flex;
+            height: 50px;
+            background-color: aliceblue;
+        }
+        .nav-links-child {
+            padding: 12px;
+            width: 100%;
+        }
+        .nav-links-child:hover {
+            transform: scale(1.2);
+            color: black;
+        }
+        /* Additional styles for the form */
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-heading {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-submit {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn-cancel {
+            width: 100%;
+            margin-top: 10px;
+        }
+</style>
+    <div class="nav-links">
+        <a href="{% url 'webuser:complaint_to_admin' %}">
+            <div class="nav-links-child">Complaint</div>
+        </a>
+        <a href="{% url 'webuser:view_complaints' %}">
+            <div class="nav-links-child">Complaints</div>
+        </a>
+    </div>
     <table align="center">
         <tr>
             <th>Sl.NO</th>

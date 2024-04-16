@@ -44,6 +44,7 @@ urlpatterns = [
     path('RejectContent/<int:rid>',views.reject_content, name='reject_content'),
     path('SeriesDetailsList/<int:sid>',views.series_details_list, name="series_details"),
     path('ContentPlay/<int:cid>',views.content_play_in_admin, name="content_play"),
+    path('SeriesPlay/<int:cid>',views.series_play_in_admin, name="series_play"),
 
     path('ViewTrailer/<int:tid>',views.view_trailer,name="view_trailer"),
 
