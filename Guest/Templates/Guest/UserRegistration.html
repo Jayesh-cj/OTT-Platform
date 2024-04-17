@@ -182,13 +182,14 @@ button{
         </label>
 
         <label for="username">Name</label>
-        <input type="text" placeholder="Name" name="txt_name" id="username">        
+        <input type="text" placeholder="Name" name="txt_name" id="username" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$">        
         
         <label for="useremail">Email</label>
-        <input type="email" placeholder="Email" name="txt_email" id="username">
+        <input type="email" placeholder="Email" required name="txt_email" id="username">
 
         <label for="usercontact">Contact</label>
-        <input type="number" placeholder="Contact" name="num_contact" id="username">
+        <input type="number" placeholder="Contact" name="num_contact" id="username"  required name="txt_contact" pattern="[7-9]{1}[0-9]{9}" 
+        title="Phone number with 7-9 and remaing 9 digit with 0-9">
 
         <label for="gender">Gender</label>
         <select id="gender" name="gender">
@@ -202,7 +203,7 @@ button{
         <input type="date" id="dob" name="date_dob">
         
         <label for="password">Password</label>
-        <input type="password" placeholder="Password" name="txt_password" id="password">
+        <input type="password" placeholder="Password" name="txt_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required id="password">
 
         <label for="confirm_password">Confirm Password</label>
         <input type="password" placeholder="Confirm Password" name="txt_con_password" id="confirm_password">

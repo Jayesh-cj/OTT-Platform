@@ -20,7 +20,8 @@ def homepage(request):
         'Content':c_count,
         'User':u_count,
         'Complaint':cmp_count,
-        'Feedback':f_count
+        'Feedback':f_count,
+        'Admin':admin
     })
 
 # Change Password
@@ -494,6 +495,7 @@ def replay_complaint(request,rid):
         data = tbl_complaint.objects.get(id=rid)
         data.complaint_replay = request.POST.get("txt_replay")
         data.complaint_status = 1
+        data.save()
         return redirect('webadmin:view_complaints')
     else:
         return render(request,'Admin/ReplayComplaint.html',{

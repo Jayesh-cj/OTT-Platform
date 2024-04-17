@@ -147,11 +147,13 @@ def payment(request):
 
 # Upcomming 
 def upcomming(request):
+    user = tbl_user.objects.get(id=request.session['uid'])
     current_date = date.today()
     # print(current_date)
     future_items = tbl_content.objects.filter(content_release_date__gt=current_date)
     return render(request,'User/Upcomming.html',{
-        'Details':future_items
+        'Details':future_items,
+        'User':user
     })
 
 # Subscribe Package
@@ -162,7 +164,7 @@ def subscribe_package(request,pid):
     subscription, status = tbl_subscription.objects.get_or_create(
         user_id=user,
         package_id=pack,
-        # subscription_date=date.today(),
+        subscription_date=date.today(),
         # subscription_status=1
     )
     # print(subscription)
@@ -184,13 +186,16 @@ def subscribe_package(request,pid):
 
 # Add Genres 
 def add_genre(request):
+    user = tbl_user.objects.get(id=request.session['uid'])
     if request.method == 'POST':
         tbl_genre.objects.create(
             genre_name = request.POST.get('txt_genre')
         )
         return redirect('webuser:add_users_contents_details')
     else:
-        return render(request,'User/AddGenre.html')
+        return render(request,'User/AddGenre.html',{
+            'User':user
+        })
 
 
 # Upload User Contets 
@@ -252,6 +257,7 @@ def add_content(request):
 
 # Upload Series 
 def add_series(request):
+    user=tbl_user.objects.get(id=request.session['uid'])
     content_details = tbl_content_details.objects.order_by("-id")
 
     if request.method == 'POST':
@@ -272,7 +278,8 @@ def add_series(request):
             'msg':msg
         })
     return render(request,'User/AddSeries.html',{
-        'Details':content_details
+        'Details':content_details,
+        'User':user
     })
     
 
@@ -353,17 +360,18 @@ def content_details(request,cid):
         })
     else:
         single = False
-        print(watchlist)
+        # print(watchlist)
 
         # content_details = tbl_content_details.objects.get(id=cid)
         series_list = tbl_content.objects.filter(details_id=cid)
-        print(series_list[0].id)
+        # print(series_list[0].id)
         play = series_list[0].id
         return render(request,'User/SeriesList.html',{
             'List':series_list,
             'Details':content_details,
             'Watchlist':watchlist,
-            'pid':play
+            'pid':play,
+            'User':user
         })
 
 
@@ -384,22 +392,31 @@ def create_watchlist(request):
         })
     else:
         return render(request,'User/Watchlist.html',{
-            'Watchlist':playlist
+            'Watchlist':playlist,
+            'User':user
         })
 
 
 # Add Content into Watchlist 
 def add_content_in_watchlit(request,wid,cid):
+    user=tbl_user.objects.get(id=request.session['uid'])
     # print(date.today())
     watchlist = tbl_watchlist.objects.get(id=wid)
     content = tbl_content_details.objects.get(id=cid)
     
-    tbL_watchlist_content.objects.create(
-        wlist_date = date.today(),
+    wcontent,status = tbL_watchlist_content.objects.get_or_create(
         watchlist_id = watchlist,
         details_id = content
     )
-    return render(request,'User/Watchlist.html')
+    if status:
+        wcontent.wlist_date=date.today()
+        wcontent.save()
+    else:
+        wcontent.wlist_date=date.today()
+        wcontent.save()
+    return render(request,'User/Watchlist.html',{
+        'User':user
+    })
 
 # View Watchlist Contents 
 def view_watchlist_contents(request,wid):
@@ -426,9 +443,11 @@ def crew_details(request,cid):
 
 # Episode Details 
 def episode_details(request,cid):
+    user=tbl_user.objects.get(id=request.session['uid'])
     episode_details = tbl_content.objects.get(id=cid)
     return render(request,'User/EpisodeDetails.html',{
-        'Details':episode_details
+        'Details':episode_details,
+        'User':user
     })
 
 # View Series Episode List 
@@ -437,20 +456,23 @@ def episode_details(request,cid):
 
 # Play Content
 def play_content(request,pid):
+    user=tbl_user.objects.get(id=request.session['uid'])
     content = tbl_content.objects.get(id=pid)
     return render(request,'User/PlayContent.html',{
-        'Content':content
+        'Content':content,
+        'User':user
     })
 
 
 # View Trailers In Admin
 def view_trailer(request,tid):
+    user=tbl_user.objects.get(id=request.session['uid'])
     data = tbl_trailer.objects.get(details_id=tid)
     link = data.trailer_url
     video_id = extract_video_id(link)
     # print("Video ID:", video_id)
     
-    return render(request,'User/ViewTrailers.html',{'Trailer':video_id})
+    return render(request,'User/ViewTrailers.html',{'Trailer':video_id,'User':user})
 
 # Ecstract Video ID from You tub Video
 def extract_video_id(url):
@@ -476,10 +498,11 @@ def review_contents(request):
 
 # View Complaints 
 def view_complaints(request):
-    user = request.session['uid']
+    user = tbl_user.objects.get(id=request.session['uid'])
     complaints = tbl_complaint.objects.filter(user_id=user)
     return render(request,'User/Complaints.html',{
-        'Complaints':complaints
+        'Complaints':complaints,
+        'User':user
     })
 
 # Complaint To Website Admin
@@ -495,7 +518,9 @@ def complaint_to_admin(request):
         )
         return redirect('webuser:homepage')
     else:
-        return render(request,'User/ComplaintToAdmin.html')
+        return render(request,'User/ComplaintToAdmin.html',{
+            'User':user
+        })
 
 
 # FeedBack 
@@ -509,7 +534,9 @@ def feedback(request):
         )
         return render(request,'User/Homepage.html')
     else:
-        return render(request,'User/Feedback.html')
+        return render(request,'User/Feedback.html',{
+            'User':user
+        })
 
 
 # Ratting 
@@ -517,8 +544,8 @@ def rating(request,cid):
     if 'uid' in request.session:
         parray=[1,2,3,4,5]
         cid=cid
-        wadata=tbL_watchlist_content.objects.get(id=cid)
-        cdata=tbl_content_details.objects.get(id=wadata.details_id.id)
+        # wadata=tbL_watchlist_content.objects.get(id=cid)
+        cdata=tbl_content_details.objects.get(id=cid)
         wdata=tbl_user.objects.get(id=request.session["uid"])
         counts=0
         counts=stardata=tbl_review.objects.filter(details_id=cdata).count()
@@ -603,7 +630,8 @@ def join_chatroom(request,jid):
     #     print('1')
     return render(request,'User/Chat.html',{
         "user":user,
-        'Room':room
+        'Room':room,
+        'User':user
     })
 
 # Joined Chatroom list 
@@ -616,7 +644,8 @@ def joined_chatroom_list(request):
     )
     return render(request,'User/Chatroomlist-Joined.html',{
         'List':List,
-        'Created':created
+        'Created':created,
+        'User':user
     })
 
 # Create Chatrrom 
@@ -635,7 +664,9 @@ def create_chatroom(request):
         )
         return redirect('webuser:chatrooms')
     else:
-        return render(request,'User/CreateChatroom.html')
+        return render(request,'User/CreateChatroom.html',{
+            'User':user
+        })
 
 
 # Chat Room
@@ -645,7 +676,8 @@ def chatpage(request,rid):
     # print(room.community_name)
     return render(request,"User/Chat.html",{
         "user":user,
-        'Room':room
+        'Room':room,
+        'User':user
     })
 
 def ajaxchat(request,rid):

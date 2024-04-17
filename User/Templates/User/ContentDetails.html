@@ -131,11 +131,12 @@ body{
                 <div class="buttons">
                     <a href="{% url 'webuser:play_content' Content.id %}" class="btn-play">Play</a>
                     <a href="{% url 'webuser:view_trailer' Details.id %}" class="btn-play">Trailer</a>
+                    <a href="{% url 'webuser:rating' Details.id %}" class="btn-play">Review</a>
                     <div class="c-dropdown">
                         <label for="c-dropdown-menu" id="c-dropdown-label" class="btn-play">Watch Latter</label>
                         <div class="c-dropdown-menu" id="c-dropdown-menu">
                             {% for i in Watchlist %}
-                                <a href="{% url 'webuser:add_content_in_watchlist' i.id First.id %}">{{ i.watchlist_name}} </a>
+                                <a href="{% url 'webuser:add_content_in_watchlist' i.id Details.id %}">{{ i.watchlist_name}} </a>
                             {% endfor %}
                             <a href="{% url 'webuser:create_watchlist' %}">Create</a>
                         </div>
@@ -178,6 +179,7 @@ body{
 {% if msg %}
     <script>
         alert("You are not allowed to access this content as you are under 18 years old.");
+        window.location.href="{% url 'webuser:homepage' %}"
     </script>
 {% endif %}
 

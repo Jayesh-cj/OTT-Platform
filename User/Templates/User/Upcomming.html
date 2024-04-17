@@ -34,14 +34,6 @@
     </style>
 </head>
 <body>
-    <div class="nav-links">
-        <a href="{% url 'webadmin:content_display' %}">
-            <div class="nav-links-child">Content List</div>
-        </a>
-        <a href="{% url 'webadmin:user_content_manage' %}">
-            <div class="nav-links-child">User Content List</div>
-        </a>
-    </div>
 
     <form action="" method="post">
         {% csrf_token %}

@@ -215,6 +215,7 @@
                                     <td>&nbsp;
                                         <a href="{% url 'webuser:content_details' i.id %}">
                                             <h1>{{ i.details_title }}</h1>
+											<b>{{ i.category_id.category_name }} | {{ i.details_certificate }} | {{ i.details_genres }} | {{ i.language_id.language_name }}</b>
                                             <p>{{ i.details_description }}</p>
                                         </a>
                                     </td>
